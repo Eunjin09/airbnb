@@ -6,6 +6,7 @@ import Header from "./Header";
 import Login from "./Login";
 import Main from "./Main";
 import Edit from "./Edit";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/write/:id" element={<Write />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
+      {/* <Footer /> */}
     </div>
   );
 }
