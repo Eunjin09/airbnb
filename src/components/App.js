@@ -1,5 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import { Main } from "../src/components/Main";
+import Header from "./Header";
+import Signup from "./Signup";
+import Login from "./Login";
+import Main from "./Main";
+import Edit from "./Edit";
+import Write from "./Write";
+import Detail from "./Detail";
 
 function App() {
   return (
