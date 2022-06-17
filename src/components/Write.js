@@ -1,7 +1,7 @@
 import React from "react";
 
-function Edit() {
+function Write() {
   return null;
 }
 
-export default Edit;
+export default Write;
