@@ -4,15 +4,54 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 function Signup() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  // 회원가입 할 정보 ref
   const email_ref = React.useRef(null);
   const password_ref = React.useRef(null);
   const repeat_password_ref = React.useRef(null);
   const nickName_ref = React.useRef(null);
 
+  // 이메일 정규표현식
+  const emailCheck = (email) => {
+    let _reg =
+      // /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-Z])*.([a-zA-Z])*/;
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    return _reg.test(email);
+  };
+  // 패스워드 정규표현식
+  const passwordCheck = (password) => {
+    let _reg =
+      /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[@$!%*#?&])[0-9a-zA-Z@$!%*#?&]{6,10}$/;
+    // 패스워드는 6 ~ 10자 영문, 숫자 및 특수문자조합
+    return _reg.test(password);
+  };
+
+  const signup = async () => {
+    //인풋값이 전부 비어있을 경우
+    if (
+      email_ref.current.value === "" ||
+      password_ref.current.value === "" ||
+      nickName_ref.current.value === ""
+    ) {
+      window.alert("정보를 입력해주세요.");
+      return;
+    }
+    // 이메일 체크
+    if (!emailCheck(email_ref.current.value)) {
+      window.alert("이메일 형식이 맞지 않습니다.");
+      return;
+    }
+    // 비밀번호 체크
+    if (!passwordCheck(password_ref.current.value)) {
+      window.alert(
+        "비밀번호는 6 ~ 10자 영문, 숫자 및 특수문자조합으로 작성하세요."
+      );
+      return;
+    }
+    //비밀번호 확인 체크
+    if (password_ref.current.value !== repeat_password_ref.current.value) {
+      window.alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+  };
   return (
     <>
       <LoginBody>
@@ -32,11 +71,10 @@ function Signup() {
                 placeholder="Email"
                 type="text"
                 ref={email_ref}
-                required
               ></Input>
             </SignUpTopInput>
             <SignUpMidInput>
-              <Input placeholder="닉네임" ref={nickName_ref} required></Input>
+              <Input placeholder="닉네임" ref={nickName_ref}></Input>
             </SignUpMidInput>
 
             <SignUpMidInput>
@@ -44,7 +82,6 @@ function Signup() {
                 placeholder="비밀번호"
                 type="password"
                 ref={password_ref}
-                required
               ></Input>
             </SignUpMidInput>
             <SingUpBottomInput>
@@ -52,11 +89,10 @@ function Signup() {
                 placeholder="비밀번호 확인"
                 type="password"
                 ref={repeat_password_ref}
-                required
               ></Input>
             </SingUpBottomInput>
             <SignUpButtonDiv>
-              <SingUpButton>가입</SingUpButton>
+              <SingUpButton onClick={signup}>가입</SingUpButton>
             </SignUpButtonDiv>
           </DownDiv>
         </LoginBox>
