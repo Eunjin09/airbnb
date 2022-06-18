@@ -7,8 +7,20 @@ import Login from "./Login";
 import Main from "./Main";
 import Edit from "./Edit";
 import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUserDB } from "../redux/modules/userSlice";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    async function load() {
+      await dispatch(loadUserDB());
+    }
+    load();
+  }, []);
   return (
     <div className="App">
       <Header></Header>

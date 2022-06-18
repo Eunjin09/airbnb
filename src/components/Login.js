@@ -1,7 +1,37 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loadUserDB, loginUserDB } from "../redux/modules/userSlice";
 
 function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  //인풋값 가져오기
+  const userId_ref = React.useRef(null);
+  const password_ref = React.useRef(null);
+
+  //유효성 검사
+  const login = async () => {
+    if (userId_ref.current.value === "" || password_ref.current.value === "") {
+      window.alert("아이디와 비밀번호를 입력하세요");
+    } else {
+      await dispatch(
+        loadUserDB({
+          userId: userId_ref.current.value,
+          password: password_ref.current.value,
+        })
+      );
+    }
+  };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      login();
+    }
+  };
+
   return (
     <>
       <LoginBody>
@@ -13,7 +43,7 @@ function Login() {
           <DownDiv>
             <Welcome>에어비앤비에 오신 것을 환영합니다.</Welcome>
             <EmaiInput>
-              <Input placeholder="Email" type="text"></Input>
+              <Input placeholder="ID" type="text"></Input>
             </EmaiInput>
             <PasswordInput>
               <Input
@@ -23,7 +53,7 @@ function Login() {
               ></Input>
             </PasswordInput>
             <LoginBtnDiv>
-              <LoginBtn>로그인</LoginBtn>
+              <LoginBtn onClick={login}>로그인</LoginBtn>
               <LoginBtn>회원가입</LoginBtn>
             </LoginBtnDiv>
           </DownDiv>
