@@ -1,34 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
 import reviewimg from "../image/reviewrank.png";
 import fakeimg from "../image/mock_calculator.png";
-// import { useParams } from "react-router-dom";
-import Header from "./Header";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
 
 function Detail() {
-  // const params = useParams();
-  // const detail_id = params.id;
-  // console.log(detail_id);
+  const params = useParams();
+  const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
+  console.log(houseId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  //댓글 작성
   const [comment, setComment] = useState();
+  const commenthouseId = { comment, houseId };
   const onChange = (e) => {
     setComment(e.target.value);
   };
-
   const addComment = () => {
-    dispatch();
-    // addCommentFB({
-
-    // })
+    dispatch(CommentActions.addCommentFB({ comment, houseId }));
   };
 
+  //댓글 불러오기
+  const commentsList = useSelector((state) => state.comment.list);
+  console.log(commentsList);
+
+  useEffect(() => {
+    dispatch(CommentActions.loadCommentFB());
+  }, []);
+
+  //댓글 삭제
+  const deleteComment = (id) => {
+    dispatch(CommentActions.deleteCommentFB({ id }));
+  };
   return (
     <>
-      <Header />
       <OutterBox>
         <div className="TopBox">
           <section>
@@ -193,43 +203,43 @@ function Detail() {
                 작성
               </button>
             </div>
-            <div className="CommentList">
-              <ul>
-                {/* {comments.map((comment, index) => { */}
-                {/* return ( */}
-                <div
-                  style={{
-                    margin: "1%",
-                    backgroundColor: "rgb(242 235 208)",
-                  }}
-                  // key={index}
-                >
-                  <div style={{ marginLeft: "2%" }}>
-                    <div>
-                      <span>nickName</span>
-                      <span> | </span>
-                      <span>createdAt</span>
-                    </div>
-                  </div>
+            <div>
+              <ul className="CommentList">
+                {commentsList.map((comment, index) => {
+                  return (
+                    <div
+                      style={{
+                        margin: "1%",
+                        backgroundColor: "rgb(242 235 208)",
+                      }}
+                      key={index}
+                    >
+                      <div style={{ marginLeft: "2%" }}>
+                        <div>
+                          <span>{comment.nickName}</span>
+                          <span> | </span>
+                          <span>{comment.createdAt}</span>
+                        </div>
+                      </div>
 
-                  <div>
-                    <div>
-                      <span>comment</span>
+                      <div>
+                        <div>
+                          <span>{comment.comment}</span>
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          margin: "1% 2%",
+                          display: "flex",
+                          justifyContent: "flex-end",
+                        }}
+                      >
+                        <button onClick={() => {}}>수정</button>
+                        <button onClick={deleteComment}>삭제</button>
+                      </div>
                     </div>
-                  </div>
-                  <div
-                    style={{
-                      margin: "1% 2%",
-                      display: "flex",
-                      justifyContent: "flex-end",
-                    }}
-                  >
-                    <button onClick={() => {}}>수정</button>
-                    <button onClick={() => {}}>삭제</button>
-                  </div>
-                </div>
-                {/* );
-            })} */}
+                  );
+                })}
               </ul>
             </div>
             <Hr />

@@ -4,47 +4,46 @@ import axios from "axios";
 //axios
 
 //댓글 작성
-axios
-  .post(`localhost:5000/comments`, {
-    comment: "comment",
-  })
-  .then((response) => {
-    setComment((current) =>
-      current.map((value) => {
-        if (comment.id === value.id) {
-          value.comment = input_text;
-        }
-        return value;
-      })
-    );
-  });
+export const addCommentFB = (commenthouseId) => {
+  //commenthouseId = comment, houseId Detail.js에서 객체로 받아와야 id 추가 시 정상적으로 들어감.
+  return async function (dispatch) {
+    try {
+      await axios
+        .post("http://localhost:5001/comments", commenthouseId)
+        .then((request) => {
+          dispatch(commentWrite(request.data));
+          alert("후기 작성 완료");
+          window.location.reload();
+        });
+    } catch (error) {
+      console.log("failed", error);
+    }
+  };
+};
+
+// 댓글 불러오기
+export const loadCommentFB = () => {
+  return async function (dispatch) {
+    await axios.get("http://localhost:5001/comments").then((response) => {
+      dispatch(commentLoad(response.data));
+    });
+  };
+};
 
 // //댓글 삭제
-//   axios
-//     .delete(
-//       `localhost:5000/comments`
-//     )
-//     .then((response) => {
-//       setComment((current) =>
-//         current.filter((value) => {
-//           return comment.id !== value.id;
-//         })
-//       );
-//     });
+export const deleteCommentFB = () => {
+  return async function (dispatch) {
+    axios.delete("http://localhost:5001/comments").then((response) => {
+      dispatch(commentDelete(response.data));
+    });
+  };
+};
 
 //action, action function, reducer
-export const CommentSlice = createSlice({
+export const commentSlice = createSlice({
   name: "comments",
   initialState: {
-    list: [
-      {
-        id: 1,
-        houseId: 1,
-        comment: "comment 작성 요망",
-        nickName: "닉네임",
-        createdAt: "2022년 6월",
-      },
-    ],
+    list: [],
   },
   reducers: {
     //댓글 저장
@@ -56,7 +55,7 @@ export const CommentSlice = createSlice({
     //댓글 불러오기
     commentLoad: (state, action) => {
       state.list = action.payload;
-      // console.log(state.list);
+      console.log(state.list);
     },
     //댓글 삭제
     commentDelete: (state, action) => {
@@ -70,7 +69,14 @@ export const CommentSlice = createSlice({
 // action creator export
 // const actionCreators = {db}
 // export {actionCreators};
+const actionCreators = {
+  addCommentFB,
+  loadCommentFB,
+  deleteCommentFB,
+};
+
+export { actionCreators };
 
 export const { commentWrite, commentLoad, commentDelete } =
-  CommentSlice.actions;
-export default CommentSlice.reducer;
+  commentSlice.actions;
+export default commentSlice.reducer;

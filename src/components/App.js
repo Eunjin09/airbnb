@@ -12,15 +12,15 @@ import { loadUserDB } from "../redux/modules/userSlice";
 import { useEffect } from "react";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    async function load() {
-      await dispatch(loadUserDB());
-    }
-    load();
-  }, []);
+  // const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   async function load() {
+  //     await dispatch(loadUserDB());
+  //   }
+  //   load();
+  // }, []);
   return (
     <div className="App">
       <Header></Header>

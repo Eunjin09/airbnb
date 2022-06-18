@@ -53,3 +53,8 @@
   width: 100%;
   max-width: 1000px;
 }
+
+.CommentList {
+  display: flex;
+  flex-direction: column-reverse;
+}
