@@ -3,24 +3,21 @@ import axios from "axios";
 
 //axios
 
-// //댓글 작성
-//   axios
-//     .patch(
-//       `localhost:5000/comments`,
-//       {
-//         comment: "comment",
-//       }
-//     )
-//     .then((response) => {
-//       setComment((current) =>
-//         current.map((value) => {
-//           if (comment.id === value.id) {
-//             value.comment = input_text;
-//           }
-//           return value;
-//         })
-//       );
-//     });
+//댓글 작성
+axios
+  .post(`localhost:5000/comments`, {
+    comment: "comment",
+  })
+  .then((response) => {
+    setComment((current) =>
+      current.map((value) => {
+        if (comment.id === value.id) {
+          value.comment = input_text;
+        }
+        return value;
+      })
+    );
+  });
 
 // //댓글 삭제
 //   axios
