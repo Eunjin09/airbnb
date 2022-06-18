@@ -1,13 +1,26 @@
 import { Routes, Route } from "react-router-dom";
-import Header from "./Header";
 import Signup from "./Signup";
+import Detail from "./Detail";
+import Write from "./Write";
+import Header from "./Header";
 import Login from "./Login";
 import Main from "./Main";
 import Edit from "./Edit";
-import Write from "./Write";
-import Detail from "./Detail";
+import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { loadUserDB } from "../redux/modules/userSlice";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    async function load() {
+      await dispatch(loadUserDB());
+    }
+    load();
+  }, []);
   return (
     <div className="App">
       <Header></Header>
@@ -19,6 +32,8 @@ function App() {
         <Route path="/write/:id" element={<Write />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
+
+      {/* <Footer /> */}
     </div>
   );
 }

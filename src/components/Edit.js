@@ -1,7 +1,7 @@
 import React from "react";
 
 function Edit() {
-  return <div></div>;
+  return null;
 }
 
 export default Edit;
