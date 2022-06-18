@@ -1,20 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
-import reviewimg from "../reviewrank.png";
+import reviewimg from "../image/reviewrank.png";
+import fakeimg from "../image/mock_calculator.png";
 // import { useParams } from "react-router-dom";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Detail() {
   // const params = useParams();
   // const detail_id = params.id;
   // console.log(detail_id);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [comment, setComment] = useState();
+  const onChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const addComment = () => {
+    dispatch();
+    // addCommentFB({
+
+    // })
+  };
 
   return (
     <>
       <Header />
       <OutterBox>
-        <>
+        <div className="TopBox">
           <section>
             <h2
               style={{
@@ -29,14 +45,22 @@ function Detail() {
                 style={{
                   width: "100%",
                   maxWidth: "200px",
-                  backgroundColor: "yellow",
                   display: "flex",
                   justifyContent: "space-between",
                 }}
               >
-                <div className="ButtonTransparent">삭제</div>
-                <div className="ButtonTransparent">수정</div>
-                <div className="ButtonTransparent">저장</div>
+                <button className="ButtonTransparent" onClick={() => {}}>
+                  삭제
+                </button>
+                <button
+                  className="ButtonTransparent"
+                  onClick={() => {
+                    navigate("/edit");
+                  }}
+                >
+                  수정
+                </button>
+                <button className="ButtonTransparent">저장</button>
               </div>
             </div>
           </section>
@@ -78,60 +102,72 @@ function Detail() {
               </div>
             </div>
           </div>
-        </>
-        <InfoOutterBox>
-          <div className="BodyBox">
-            <div>
-              <h2
-                style={{
-                  marginBottom: "0px",
-                }}
-              >
-                username님이 호스팅하는 집의 개인실
-              </h2>
-              <span>최대 인원 personCnt명</span>
+        </div>
+        <div className="Body">
+          <InfoOutterBox>
+            <div className="InfoTitleBox">
+              <div>
+                <h2
+                  style={{
+                    marginBottom: "0px",
+                  }}
+                >
+                  userName님이 호스팅하는 집의 개인실
+                </h2>
+                <span>최대 인원 personCnt명</span>
+              </div>
+              <span>Price</span>
             </div>
-            <span>Price</span>
-          </div>
-          <Hr />
-          <div className="aricoverImg" />
-          <p>
-            모든 예약에는 호스트가 예약을 취소하거나 숙소 정보가 정확하지 않은
-            경우 또는 체크인에 문제가 있는 상황에 대비한 무료 보호 프로그램이
-            포함됩니다.
-          </p>
-          <p style={{ fontWeight: "600", textDecoration: "underline" }}>
-            더 알아보기
-          </p>
-          <Hr />
-          <p>houseinfo</p>
-          <Hr />
-          <h2 className="BodyTitle">숙소 편의시설</h2>
+            <Hr />
+            <div className="aricoverImg" />
+            <p>
+              모든 예약에는 호스트가 예약을 취소하거나 숙소 정보가 정확하지 않은
+              경우 또는 체크인에 문제가 있는 상황에 대비한 무료 보호 프로그램이
+              포함됩니다.
+            </p>
+            <p style={{ fontWeight: "600", textDecoration: "underline" }}>
+              더 알아보기
+            </p>
+            <Hr />
+            <p>houseinfo</p>
+            <Hr />
+            <h2 className="BodyTitle">숙소 편의시설</h2>
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "300px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <span> 💻 무선 인터넷</span>
+              <span> 🅿️ 건물 내 무료주차</span>
+            </div>
+            <Hr />
+            <h2 className="BodyTitle" style={{ marginBottom: "2px" }}>
+              체크인 날짜를 선택해주세요.
+            </h2>
+            <span
+              style={{ color: "#8e8e8e", fontWeight: "400", fontSize: "14px" }}
+            >
+              여행 날짜를 입력하여 정확한 요금을 확인하세요.
+            </span>
+            <div className="Calendar"></div>
+            달력 react-calendar? react-datepicker? moment?
+          </InfoOutterBox>
           <div
             style={{
-              width: "100%",
-              maxWidth: "300px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
+              width: "350px",
+              backgroundSize: "cover",
             }}
           >
-            <span> 💻 무선 인터넷</span>
-            <span> 🅿️ 건물 내 무료주차</span>
+            <img src={fakeimg} alt="fakeimg" width="350px" />
           </div>
-          <Hr />
-          <h2 className="BodyTitle" style={{ marginBottom: "2px" }}>
-            체크인 날짜를 선택해주세요.
-          </h2>
-          <span
-            style={{ color: "#8e8e8e", fontWeight: "400", fontSize: "14px" }}
-          >
-            여행 날짜를 입력하여 정확한 요금을 확인하세요.
-          </span>
-          <div className="Calendar"></div>
-          달력 react-calendar? react-datepicker? moment?
-        </InfoOutterBox>
+        </div>
         <Hr />
+
+        {/* 후기/댓글 부분 */}
         <div className="Commentarea">
           <h2 className="BodyTitle">★ 4.74 후기﹒commentCnt개</h2>
           <img
@@ -145,8 +181,17 @@ function Detail() {
               <textarea
                 className="InputComment"
                 placeholder="100자 이내로 후기를 작성해주세요."
+                onChange={onChange}
+                value={comment}
               ></textarea>
-              <button>작성</button>
+              <button
+                onClick={() => {
+                  dispatch(addComment);
+                  console.log(comment);
+                }}
+              >
+                작성
+              </button>
             </div>
             <div className="CommentList">
               <ul>
@@ -179,55 +224,8 @@ function Detail() {
                       justifyContent: "flex-end",
                     }}
                   >
-                    <button
-                      onClick={() => {
-                        // if (userCookie) {
-                        //   console.log("회원 클릭");
-                        //   axios
-                        //     .patch(
-                        //       `http://13.124.220.124/comment/${pokemonId}`,
-                        //       {
-                        //         comment: input_text.current.value,
-                        //       }
-                        //     )
-                        //     .then((response) => {
-                        //       setComment((current) =>
-                        //         current.map((value) => {
-                        //           if (comment.id === value.id) {
-                        //             value.comment = input_text.current.value;
-                        //           }
-                        //           return value;
-                        //         })
-                        //       );
-                        //     });
-                        // } else {
-                        //   alert("로그인 해주세요!");
-                        // }
-                      }}
-                    >
-                      수정
-                    </button>
-                    <button
-                      onClick={() => {
-                        // if (userCookie) {
-                        //   axios
-                        //     .delete(
-                        //       `http://13.124.220.124/comment/${pokemonId}`
-                        //     )
-                        //     .then((response) => {
-                        //       setComment((current) =>
-                        //         current.filter((value) => {
-                        //           return comment.id !== value.id;
-                        //         })
-                        //       );
-                        //     });
-                        // } else {
-                        //   alert("로그인 해주세요!");
-                        // }
-                      }}
-                    >
-                      삭제
-                    </button>
+                    <button onClick={() => {}}>수정</button>
+                    <button onClick={() => {}}>삭제</button>
                   </div>
                 </div>
                 {/* );

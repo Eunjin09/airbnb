@@ -18,7 +18,7 @@
   margin: 2% 0;
 }
 
-.BodyBox {
+.InfoTitleBox {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,6 +35,13 @@
 .BodyTitle {
   font-size: 22px;
   font-weight: 600;
+}
+
+.Body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
 }
 
 .Commentarea {
