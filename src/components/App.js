@@ -17,7 +17,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<Main />}></Route>
         <Route path="/edit" element={<Edit />}></Route>
-        <Route path="/write/:id" element={<Write />}></Route>
+        <Route path="/write" element={<Write />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
       {/* <Footer /> */}
