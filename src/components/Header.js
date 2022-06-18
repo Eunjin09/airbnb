@@ -11,6 +11,7 @@ const Header = () => {
   const navigate = useNavigate();
   const user_name = localStorage.getItem("user_name");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [signupModalIsOpen, setSignupModalIsopen] = useState(false);
 
   return (
     <HeadDiv>
@@ -19,15 +20,61 @@ const Header = () => {
           <img src={logo} width="125px" style={{ paddingLeft: " 15px" }} />
         </div>
         <Btn>
-          <button onClick={() => setModalIsOpen(true)}>회원가입</button>
+          <button onClick={() => setSignupModalIsopen(true)}>회원가입</button>
           <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}
+            style={{
+              overlay: {
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.4)",
+              },
+              content: {
+                position: "absolute",
+                alignItems: "center",
+                margin: "auto",
+                width: "800px",
+                border: "1px solid #ccc",
+                background: "#fff",
+                overflow: "auto",
+                WebkitOverflowScrolling: "touch",
+                borderRadius: "4px",
+                outline: "none",
+                padding: "20px",
+              },
+            }}
+            isOpen={signupModalIsOpen}
+            onRequestClose={() => setSignupModalIsopen(false)}
           >
             <Signup />
           </Modal>
           <button onClick={() => setModalIsOpen(true)}>로그인</button>
           <Modal
+            style={{
+              overlay: {
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.4)",
+              },
+              content: {
+                position: "absolute",
+                alignItems: "center",
+                margin: "auto",
+                width: "800px",
+                border: "1px solid #ccc",
+                background: "#fff",
+                overflow: "auto",
+                WebkitOverflowScrolling: "touch",
+                borderRadius: "4px",
+                outline: "none",
+                padding: "20px",
+              },
+            }}
             isOpen={modalIsOpen}
             onRequestClose={() => setModalIsOpen(false)}
           >
