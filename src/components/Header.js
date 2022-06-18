@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { logo } from "../image/index";
+import Modal from "react-modal";
+import Signup from "./Signup";
+import Login from "./Login";
+
 const Header = () => {
   const navigate = useNavigate();
   const user_name = localStorage.getItem("user_name");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   return (
     <HeadDiv>
@@ -14,20 +19,20 @@ const Header = () => {
           <img src={logo} width="125px" style={{ paddingLeft: " 15px" }} />
         </div>
         <Btn>
-          <button
-            onClick={() => {
-              navigate("/signup");
-            }}
+          <button onClick={() => setModalIsOpen(true)}>회원가입</button>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
           >
-            회원가입
-          </button>
-          <button
-            onClick={() => {
-              navigate("/login");
-            }}
+            <Signup />
+          </Modal>
+          <button onClick={() => setModalIsOpen(true)}>로그인</button>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
           >
-            로그인
-          </button>
+            <Login />
+          </Modal>
         </Btn>
       </Center>
     </HeadDiv>

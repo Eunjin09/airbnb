@@ -2,20 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { createUserDB } from "../redux/modules/userSlice";
 
 function Signup() {
-  const email_ref = React.useRef(null);
+  const userId_ref = React.useRef(null);
   const password_ref = React.useRef(null);
   const repeat_password_ref = React.useRef(null);
   const nickName_ref = React.useRef(null);
 
   // 이메일 정규표현식
-  const emailCheck = (email) => {
-    let _reg =
-      // /^[0-9a-zA-Z]([-_.0-9a-zA-Z])*@[0-9a-zA-Z]([-_.0-9a-zA-Z])*.([a-zA-Z])*/;
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-    return _reg.test(email);
-  };
+
   // 패스워드 정규표현식
   const passwordCheck = (password) => {
     let _reg =
@@ -27,18 +23,14 @@ function Signup() {
   const signup = async () => {
     //인풋값이 전부 비어있을 경우
     if (
-      email_ref.current.value === "" ||
+      userId_ref.current.value === "" ||
       password_ref.current.value === "" ||
       nickName_ref.current.value === ""
     ) {
       window.alert("정보를 입력해주세요.");
       return;
     }
-    // 이메일 체크
-    if (!emailCheck(email_ref.current.value)) {
-      window.alert("이메일 형식이 맞지 않습니다.");
-      return;
-    }
+
     // 비밀번호 체크
     if (!passwordCheck(password_ref.current.value)) {
       window.alert(
@@ -50,6 +42,14 @@ function Signup() {
     if (password_ref.current.value !== repeat_password_ref.current.value) {
       window.alert("비밀번호가 일치하지 않습니다.");
       return;
+    } else {
+      dispatchEvent(
+        createUserDB({
+          userId: userId_ref.current.value,
+          nickName: nickName_ref.current.value,
+          password: password_ref.current.value,
+        })
+      );
     }
   };
   return (
@@ -67,10 +67,10 @@ function Signup() {
             {/* <Info>(아랫쪽에 안내문구가 나와야 정상)</Info> */}
             <SignUpTopInput>
               <Input
-                name="Email"
-                placeholder="Email"
+                name="userId"
+                placeholder="아이디"
                 type="text"
-                ref={email_ref}
+                ref={userId_ref}
               ></Input>
             </SignUpTopInput>
             <SignUpMidInput>
