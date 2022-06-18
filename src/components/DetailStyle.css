@@ -1,0 +1,38 @@
+.SecondBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ButtonTransparent {
+  background-color: transparent;
+  border: transparent;
+  text-decoration: underline;
+}
+
+.ImageBox {
+  display: flex;
+  background-color: skyblue;
+  border-radius: 5%;
+  margin: 2% 0;
+}
+
+.BodyBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.aricoverImg {
+  width: 100%;
+  max-width: 95px;
+  height: 25px;
+  background-size: cover;
+  background-image: url("https://a0.muscache.com/im/pictures/51a7f002-b223-4e05-a2af-0d4838411d92.jpg");
+}
+
+.BodyTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
