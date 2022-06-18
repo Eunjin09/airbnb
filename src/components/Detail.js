@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
-import { useParams } from "react-router-dom";
+import reviewimg from "../reviewrank.png";
+// import { useParams } from "react-router-dom";
 import Header from "./Header";
 
 function Detail() {
-  const params = useParams();
-  const detail_id = params.id;
+  // const params = useParams();
+  // const detail_id = params.id;
   // console.log(detail_id);
 
   return (
@@ -23,7 +24,7 @@ function Detail() {
               house name : 블랑드누아 (2인) blanc de noir 하귀애월해안도로
             </h2>
             <div className="SecondBox">
-              <span>⭐️ 4.74 후기 commentCnt개 "address"</span>
+              <span>★ 4.74 후기 commentCnt개 "address"</span>
               <div
                 style={{
                   width: "100%",
@@ -130,8 +131,115 @@ function Detail() {
           <div className="Calendar"></div>
           달력 react-calendar? react-datepicker? moment?
         </InfoOutterBox>
-        <div className="CommentBox">
-          <h2 className="BodyTitle">⭐️ 4.74 후기﹒commentCnt개</h2>
+        <Hr />
+        <div className="Commentarea">
+          <h2 className="BodyTitle">★ 4.74 후기﹒commentCnt개</h2>
+          <img
+            src={reviewimg}
+            alt="reviewimg"
+            width="100%"
+            max-width="1120px"
+          />
+          <div className="CommentBox">
+            <div style={{ display: "flex", gap: "1%", margin: "2% 0" }}>
+              <textarea
+                className="InputComment"
+                placeholder="100자 이내로 후기를 작성해주세요."
+              ></textarea>
+              <button>작성</button>
+            </div>
+            <div className="CommentList">
+              <ul>
+                {/* {comments.map((comment, index) => { */}
+                {/* return ( */}
+                <div
+                  style={{
+                    margin: "1%",
+                    backgroundColor: "rgb(242 235 208)",
+                  }}
+                  // key={index}
+                >
+                  <div style={{ marginLeft: "2%" }}>
+                    <div>
+                      <span>nickName</span>
+                      <span> | </span>
+                      <span>createdAt</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div>
+                      <span>comment</span>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      margin: "1% 2%",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <button
+                      onClick={() => {
+                        // if (userCookie) {
+                        //   console.log("회원 클릭");
+                        //   axios
+                        //     .patch(
+                        //       `http://13.124.220.124/comment/${pokemonId}`,
+                        //       {
+                        //         comment: input_text.current.value,
+                        //       }
+                        //     )
+                        //     .then((response) => {
+                        //       setComment((current) =>
+                        //         current.map((value) => {
+                        //           if (comment.id === value.id) {
+                        //             value.comment = input_text.current.value;
+                        //           }
+                        //           return value;
+                        //         })
+                        //       );
+                        //     });
+                        // } else {
+                        //   alert("로그인 해주세요!");
+                        // }
+                      }}
+                    >
+                      수정
+                    </button>
+                    <button
+                      onClick={() => {
+                        // if (userCookie) {
+                        //   axios
+                        //     .delete(
+                        //       `http://13.124.220.124/comment/${pokemonId}`
+                        //     )
+                        //     .then((response) => {
+                        //       setComment((current) =>
+                        //         current.filter((value) => {
+                        //           return comment.id !== value.id;
+                        //         })
+                        //       );
+                        //     });
+                        // } else {
+                        //   alert("로그인 해주세요!");
+                        // }
+                      }}
+                    >
+                      삭제
+                    </button>
+                  </div>
+                </div>
+                {/* );
+            })} */}
+              </ul>
+            </div>
+            <Hr />
+            <h2 className="BodyTitle">호스팅 지역</h2>
+            map , address
+            <Hr />
+            <h2 className="BodyTitle">호스트: nickName님</h2>
+          </div>
         </div>
       </OutterBox>
     </>

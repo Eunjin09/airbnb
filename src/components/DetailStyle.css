@@ -36,3 +36,13 @@
   font-size: 22px;
   font-weight: 600;
 }
+
+.Commentarea {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.InputComment {
+  width: 100%;
+  max-width: 1000px;
+}
