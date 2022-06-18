@@ -17,7 +17,7 @@ const Header = () => {
     <HeadDiv>
       <Center>
         <div>
-          <img src={logo} width="125px" style={{ paddingLeft: " 15px" }} />
+          <img src={logo} width="100px" style={{ paddingLeft: " 15px" }} />
         </div>
         <Btn>
           <button onClick={() => setSignupModalIsopen(true)}>회원가입</button>
@@ -89,7 +89,7 @@ const Header = () => {
 export default Header;
 
 const Center = styled.div`
-  min-width: 1150px;
+  min-width: 1280px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -105,7 +105,7 @@ const HeadDiv = styled.div`
 `;
 
 const Btn = styled.div`
-  width: 20%;
+  width: 15%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;

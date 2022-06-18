@@ -5,7 +5,6 @@ import Header from "./Header";
 function Main() {
   return (
     <>
-      <Header />
       <MainBox>
         <BackImg />
         <FormBox>
@@ -64,21 +63,24 @@ function Main() {
         <ul>
           <li>
             <div><img src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200" alt="" /></div>
-            <span>4.73</span>
+            <span><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" ></path></svg>4.73</span>
+            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
             <p>
               이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과 매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한 세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고 따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이 없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고, 통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
             </p>
           </li>
           <li>
             <div><img src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200" alt="" /></div>
-            <span>4.73</span>
+            <span><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z"></path></svg>4.73</span>
+            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
             <p>
               이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과 매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한 세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고 따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이 없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고, 통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
             </p>
           </li>
           <li>
             <div><img src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200" alt="" /></div>
-            <span>4.73</span>
+            <span><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z"></path></svg>4.73</span>
+            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
             <p>
               이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과 매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한 세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고 따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이 없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고, 통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
             </p>
@@ -100,7 +102,7 @@ function Main() {
   )
 }
 
-
+// section1
 const MainBox = styled.section`
 position: relative;
 width: 1280px;
@@ -137,7 +139,7 @@ const FormBox = styled.div`
   p {
     font-size: 16px;
     font-weight: 300;
-    padding: 8px 0;
+    padding: 15px 0 10px;
     color: #717171;
   }
   .place, .check_date, .personCnt {
@@ -191,6 +193,7 @@ const SearchBtn = styled.button`
   color: #fff;
   padding: 10px 0;
   border-radius: 12px;
+  margin-top: 10px;
   svg {
     height:12px;
     width:12px;
@@ -199,14 +202,97 @@ const SearchBtn = styled.button`
     margin-right: 6px;
   }
 `
-const RankList = styled.section`
 
-img {
-  width:100%;
-  height: 100%;
+
+// section2
+const RankList = styled.section`
+position: relative;
+width: 1280px;
+max-width: 1280px;
+margin:0 auto;
+h2 {
+  font-size:26px;
+  font-weight: 500;
 }
+h3 {
+  font-weight: 300;
+  margin-top : 8px;
+}
+p {
+  font-size: 16px;
+  font-weight: 300;
+  padding: 10px 0 10px;
+  color: #717171;
+}
+span {
+  font-weight : 300;
+  padding-top : 10px;
+}
+img {
+  border-radius: 12px;
+}
+ul {
+  display: flex;
+}
+li {
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+li:first-child{
+  margin-left: 0;
+}
+li:last-child{
+  margin-right: 0;
+}
+li > div {
+  width: 100%;
+  height: 277px;
+  margin-bottom: 7px;
+}
+li > p {
+  font-size: 15px;
+    line-height: 1.2;
+  // 텍스트 ... 변경
+   /* overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: normal;
+   word-wrap: break-word; */
+}
+svg {
+  display:inline-block;
+  height:14px;
+  width:14px;
+  color: #E01561;
+  fill:currentColor;
+  margin-right: 5px;
+}
+
 `
 const OptionList = styled.section`
+position: relative;
+width: 1280px;
+max-width: 1280px;
+margin:0 auto;
+h2 {
+  font-size:26px;
+  font-weight: 500;
+}
+
+ul {
+  display: flex;
+}
+li {
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+}
 
 `
 const List = styled.section`
