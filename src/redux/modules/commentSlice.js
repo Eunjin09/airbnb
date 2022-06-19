@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
 //axios
 
 //댓글 작성
@@ -9,7 +8,7 @@ export const addCommentFB = (commenthouseId) => {
   return async function (dispatch) {
     try {
       await axios
-        .post("http://localhost:5001/comments", commenthouseId)
+        .post(`http://localhost:5001/comments/`, commenthouseId)
         .then((request) => {
           dispatch(commentWrite(request.data));
           alert("후기 작성 완료");
@@ -22,19 +21,20 @@ export const addCommentFB = (commenthouseId) => {
 };
 
 // 댓글 불러오기
-export const loadCommentFB = () => {
+export const loadCommentFB = (houseId) => {
   return async function (dispatch) {
-    await axios.get("http://localhost:5001/comments").then((response) => {
+    await axios.get(`http://localhost:5001/comments/`).then((response) => {
       dispatch(commentLoad(response.data));
     });
   };
 };
 
 // //댓글 삭제
-export const deleteCommentFB = () => {
+export const deleteCommentFB = (id) => {
   return async function (dispatch) {
-    axios.delete("http://localhost:5001/comments").then((response) => {
-      dispatch(commentDelete(response.data));
+    axios.delete(`http://localhost:5001/comments/${id}`).then((response) => {
+      dispatch(commentDelete(response));
+      window.location.reload();
     });
   };
 };
@@ -55,10 +55,11 @@ export const commentSlice = createSlice({
     //댓글 불러오기
     commentLoad: (state, action) => {
       state.list = action.payload;
-      console.log(state.list);
+      // console.log(state.list);
     },
     //댓글 삭제
     commentDelete: (state, action) => {
+      // console.log(action.payload);
       const new_commentlist = state.list.filter((v) => v.id !== action.payload);
       state.list = new_commentlist;
       // console.log(new_commentlist);

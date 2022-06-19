@@ -7,11 +7,12 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
+import { commentDelete } from "../redux/modules/commentSlice";
 
 function Detail() {
   const params = useParams();
   const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
-  console.log(houseId);
+  // console.log(houseId);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,16 +28,12 @@ function Detail() {
 
   //댓글 불러오기
   const commentsList = useSelector((state) => state.comment.list);
-  console.log(commentsList);
+  // console.log(commentsList);
 
   useEffect(() => {
     dispatch(CommentActions.loadCommentFB());
   }, []);
 
-  //댓글 삭제
-  const deleteComment = (id) => {
-    dispatch(CommentActions.deleteCommentFB({ id }));
-  };
   return (
     <>
       <OutterBox>
@@ -187,24 +184,32 @@ function Detail() {
             max-width="1120px"
           />
           <div className="CommentBox">
-            <div style={{ display: "flex", gap: "1%", margin: "2% 0" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "1%",
+                margin: "2% 0",
+                justifyContent: "center",
+              }}
+            >
               <textarea
                 className="InputComment"
                 placeholder="100자 이내로 후기를 작성해주세요."
                 onChange={onChange}
                 value={comment}
+                style={{ height: "1%" }}
               ></textarea>
               <button
                 onClick={() => {
                   dispatch(addComment);
-                  console.log(comment);
+                  // console.log(comment);
                 }}
               >
                 작성
               </button>
             </div>
             <div>
-              <ul className="CommentList">
+              <div className="CommentList">
                 {commentsList.map((comment, index) => {
                   return (
                     <div
@@ -234,13 +239,27 @@ function Detail() {
                           justifyContent: "flex-end",
                         }}
                       >
-                        <button onClick={() => {}}>수정</button>
-                        <button onClick={deleteComment}>삭제</button>
+                        {/* <button onClick={() => {}}>수정</button> */}
+                        <button
+                          onClick={() => {
+                            console.log("삭제버튼 클릭");
+                            // console.log(comment.id);
+                            dispatch(
+                              // commentDelete(comment.id)
+                              CommentActions.deleteCommentFB(
+                                comment.id
+                                // comment.nickName
+                              )
+                            );
+                          }}
+                        >
+                          삭제
+                        </button>
                       </div>
                     </div>
                   );
                 })}
-              </ul>
+              </div>
             </div>
             <Hr />
             <h2 className="BodyTitle">호스팅 지역</h2>
