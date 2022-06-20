@@ -42,6 +42,7 @@ const CRli = styled.li`
   margin: 0px 20px;
   font-size: 0.9rem;
 `;
+
 const CopyRightul = styled.div``;
 
 const IconDiv = styled.div``;
