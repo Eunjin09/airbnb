@@ -1,0 +1,9 @@
+{
+  "user": [
+    {
+      "userId": "admin",
+      "password": "asd123#",
+      "nickName": "어드민"
+    }
+  ]
+}
