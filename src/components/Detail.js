@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
 import reviewimg from "../image/reviewrank.png";
-import fakeimg from "../image/mock_calculator.png";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
+// import Map from "./Detailmap";
 
 function Detail() {
   const params = useParams();
@@ -16,7 +16,8 @@ function Detail() {
   const dispatch = useDispatch();
 
   const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
-
+  const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  // console.log(adultcount);
   //댓글 작성
   const [comment, setComment] = useState();
   const [textareaHeight, setTextareaHeight] = useState(0);
@@ -32,11 +33,15 @@ function Detail() {
 
   //댓글 불러오기
   const commentsList = useSelector((state) => state.comment.list);
-  console.log(commentsList);
+  // console.log(commentsList);
+  const [clist, setClist] = useState();
+  // clist.slice(0, 10);
 
   useEffect(() => {
     dispatch(CommentActions.loadCommentFB());
   }, []);
+
+  //지도
 
   return (
     <>
@@ -232,7 +237,70 @@ function Detail() {
               backgroundSize: "cover",
             }}
           >
-            <img src={fakeimg} alt="fakeimg" width="350px" />
+            <FormBox>
+              <h1>요금을 확인하려면 날짜를 입력하세요.</h1>
+              <p> ★ 4.74 후기 commentCnt개 </p>
+              <form>
+                <div className="check_date">
+                  <div className="checkIn">
+                    <label>
+                      <span>체크인</span>
+                      <input
+                        type="text"
+                        placeholder="날짜 추가"
+                        style={{ width: "110px" }}
+                      />
+                    </label>
+                  </div>
+                  <div className="checkOut">
+                    <label>
+                      <span>체크아웃</span>
+                      <input
+                        type="text"
+                        placeholder="날짜 추가"
+                        style={{ width: "110px" }}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="personCnt">
+                  <div className="adultBox">
+                    <label>
+                      <span>성인</span>
+                      <select name="adult" id="">
+                        {adultcount.map((v) => {
+                          return <option value={v}>{v}</option>;
+                        })}
+                      </select>
+                    </label>
+                  </div>
+                  <div className="childBox">
+                    <label>
+                      <span>어린이</span>
+                      <select name="child" id="">
+                        <option value="4">1</option>
+                        <option value="8">2</option>
+                        <option value="12">3</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
+                <SearchBtn>예약 가능 여부 보기</SearchBtn>
+              </form>
+              <br />
+              <br />
+              <br />
+              <p
+                style={{
+                  textAlign: "center",
+                  color: "gray",
+                  fontWeight: "800",
+                  textDecoration: "underline 2px",
+                }}
+              >
+                숙소 신고하기
+              </p>
+            </FormBox>
           </div>
         </div>
         <Hr />
@@ -291,20 +359,35 @@ function Detail() {
                     <div
                       style={{
                         margin: "1%",
-                        backgroundColor: "rgb(242 235 208)",
+                        // backgroundColor: "rgb(242 235 208)",
                       }}
                       key={index}
                     >
-                      <div style={{ margin: "2% 0% 0% 2%", color: "gray" }}>
-                        <div>
-                          <span>닉네임: {comment.nickName}</span>
-                          <span> | </span>
-                          <span>등록일: {comment.createdAt}</span>
+                      <div
+                        style={{
+                          margin: "2% 0% 0% 2%",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div className="profileImg" alt="profileImg" />
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
+                          <span style={{ fontSize: "16px" }}>
+                            닉네임: {comment.nickName}
+                          </span>
+                          <span style={{ color: "gray", fontSize: "14px" }}>
+                            등록일: {comment.createdAt}
+                          </span>
                         </div>
                         <br />
                       </div>
                       <div>
-                        <div style={{ margin: "0% 2%" }}>
+                        <div style={{ margin: "1% 3% 2% 3%" }}>
                           <span>{comment.comment}</span>
                         </div>
                       </div>
@@ -338,10 +421,21 @@ function Detail() {
                   );
                 })}
               </div>
+              <button
+                onClick={() => {
+                  setClist();
+                }}
+              >
+                더보기
+              </button>
             </div>
             <Hr />
+            {/* 숙소 지도 */}
             <h2 className="BodyTitle">호스팅 지역</h2>
-            map , address
+            <div id="map" style={{ width: "1000px", height: "400px" }}>
+              {/* <Map /> */}
+            </div>
+            address
             <Hr />
             <h2 className="BodyTitle">호스트: nickName님</h2>
           </div>
@@ -351,16 +445,18 @@ function Detail() {
   );
 }
 const OutterBox = styled.div`
-  width: 100%;
+  width: 95%;
   max-width: 1120px;
   margin: auto;
+  border-top: 1px solid #ddd;
 `;
 
 const SmallImageBox = styled.div`
   width: 100%;
   maxwidth: 280px;
   margin: 1%;
-  height: 200px;
+  height: 100%;
+  maxheight: 200px;
   background-size: cover;
   &:hover {
     filter: brightness(70%);
@@ -378,4 +474,92 @@ const Hr = styled.div`
   border-bottom: 1px solid #f6f6f6;
   border-color: #dddddd;
 `;
+
+const FormBox = styled.div`
+  position: relative;
+  width: 280px;
+  height: 340px;
+  background: #fff;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
+  border-radius: 12px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-top: 0;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .place,
+  .check_date,
+  .personCnt {
+    width: 90%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 14px;
+    margin-bottom: 8px;
+    div {
+      display: inline-block;
+      width: 50%;
+    }
+    .checkIn {
+      border-right: 1px solid #ddd;
+      padding-right: 7px;
+    }
+    .checkOut {
+      padding-left: 14px;
+    }
+    .adultBox {
+      border-right: 1px solid #ddd;
+      padding-right: 14px;
+    }
+    .childBox {
+      padding-left: 14px;
+    }
+    select {
+      border: none;
+      width: 100%;
+    }
+  }
+  span {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 800;
+  }
+  input {
+    font-size: 1rem;
+    border: none;
+  }
+  input::placeholder {
+    color: #484848;
+  }
+  form {
+    margin-top: 10px;
+  }
+`;
+const SearchBtn = styled.button`
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  background: #e01561;
+  color: #fff;
+  padding: 10px 0;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-weight: 600;
+  svg {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    fill: currentColor;
+    margin-right: 6px;
+  }
+  border: none;
+  padding: 6%;
+`;
+
 export default Detail;

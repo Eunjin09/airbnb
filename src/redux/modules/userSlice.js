@@ -14,7 +14,7 @@ export const loginUserDB = (data) => {
   return async function (dispatch) {
     console.log("로그인");
     await instance.post("/login", data).then((response) => {
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.accessToken);
       window.location.replace("/");
     });
   };

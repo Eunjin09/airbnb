@@ -43,6 +43,7 @@
   position: relative;
 }
 
+/* 댓글 CSS */
 .Commentarea {
   width: 100%;
   max-width: 1120px;
@@ -56,4 +57,22 @@
 .CommentList {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.profileImg {
+  width: 56px;
+  height: 56px;
+  margin-right: 0.5%;
+  border-radius: 50%;
+  background-size: cover;
+  background-image: url("https://a0.muscache.com/defaults/user_pic-225x225.png?im_w=240");
+}
+
+/* 예약가능여부 창 CSS */
+.check_date {
+  display: flex;
+}
+
+.personCnt {
+  display: flex;
 }
