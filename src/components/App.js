@@ -9,7 +9,19 @@ import Edit from "./Edit";
 import Footer from "./Footer";
 import SearchList from "./SearchList";
 
+
 function App() {
+
+  // const dispatch = useDispatch();
+
+  // const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   async function load() {
+  //     await dispatch(loadUserDB());
+  //   }
+  //   load();
+  // }, []);
+
   return (
     <div className="App">
       <Header></Header>
@@ -22,7 +34,7 @@ function App() {
         <Route path="/search" element={<SearchList />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
