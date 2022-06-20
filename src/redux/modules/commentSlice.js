@@ -3,7 +3,7 @@ import axios from "axios";
 //axios
 
 //댓글 작성
-export const addCommentFB = (commenthouseId) => {
+export const addCommentDB = (commenthouseId) => {
   //commenthouseId = comment, houseId Detail.js에서 객체로 받아와야 id 추가 시 정상적으로 들어감.
   return async function (dispatch) {
     try {
@@ -21,7 +21,7 @@ export const addCommentFB = (commenthouseId) => {
 };
 
 // 댓글 불러오기
-export const loadCommentFB = (houseId) => {
+export const loadCommentDB = (houseId) => {
   return async function (dispatch) {
     await axios.get(`http://localhost:5001/comments/`).then((response) => {
       dispatch(commentLoad(response.data));
@@ -30,7 +30,7 @@ export const loadCommentFB = (houseId) => {
 };
 
 // //댓글 삭제
-export const deleteCommentFB = (id) => {
+export const deleteCommentDB = (id) => {
   return async function (dispatch) {
     axios.delete(`http://localhost:5001/comments/${id}`).then((response) => {
       dispatch(commentDelete(response));
@@ -71,9 +71,9 @@ export const commentSlice = createSlice({
 // const actionCreators = {db}
 // export {actionCreators};
 const actionCreators = {
-  addCommentFB,
-  loadCommentFB,
-  deleteCommentFB,
+  addCommentDB,
+  loadCommentDB,
+  deleteCommentDB,
 };
 
 export { actionCreators };

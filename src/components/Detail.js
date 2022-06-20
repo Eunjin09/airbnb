@@ -28,7 +28,7 @@ function Detail() {
   };
 
   const addComment = () => {
-    dispatch(CommentActions.addCommentFB({ comment, houseId }));
+    dispatch(CommentActions.addCommentDB({ comment, houseId }));
   };
 
   //댓글 불러오기
@@ -38,7 +38,7 @@ function Detail() {
   // clist.slice(0, 10);
 
   useEffect(() => {
-    dispatch(CommentActions.loadCommentFB());
+    dispatch(CommentActions.loadCommentDB());
   }, []);
 
   //지도
@@ -406,7 +406,7 @@ function Detail() {
                               // console.log(comment.id);
                               dispatch(
                                 // commentDelete(comment.id)
-                                CommentActions.deleteCommentFB(
+                                CommentActions.deleteCommentDB(
                                   comment.id
                                   // comment.nickName
                                 )
@@ -453,13 +453,12 @@ const OutterBox = styled.div`
 
 const SmallImageBox = styled.div`
   width: 100%;
-  maxwidth: 280px;
+  max-width: 28vw;
   margin: 1%;
-  height: 100%;
-  maxheight: 200px;
+  height: 20vh;
   background-size: cover;
   &:hover {
-    filter: brightness(70%);
+    filter: brightness(50%);
   }
 `;
 
