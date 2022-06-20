@@ -12,15 +12,15 @@ import { loadUserDB } from "../redux/modules/userSlice";
 import { useEffect } from "react";
 
 function App() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    async function load() {
-      await dispatch(loadUserDB());
-    }
-    load();
-  }, []);
+  // const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   async function load() {
+  //     await dispatch(loadUserDB());
+  //   }
+  //   load();
+  // }, []);
   return (
     <div className="App">
       <Header></Header>
@@ -29,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<Main />}></Route>
         <Route path="/edit" element={<Edit />}></Route>
-        <Route path="/write/:id" element={<Write />}></Route>
+        <Route path="/write" element={<Write />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
       <Footer />
