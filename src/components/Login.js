@@ -14,11 +14,11 @@ function Login() {
 
   //유효성 검사
   const login = async () => {
-    if (userId_ref.current.value === "" || password_ref.current.value === "") {
+    if (userId_ref.current.value == "" || password_ref.current.value == "") {
       window.alert("아이디와 비밀번호를 입력하세요");
     } else {
       await dispatch(
-        loadUserDB({
+        loginUserDB({
           userId: userId_ref.current.value,
           password: password_ref.current.value,
         })
@@ -43,13 +43,14 @@ function Login() {
           <DownDiv>
             <Welcome>에어비앤비에 오신 것을 환영합니다.</Welcome>
             <EmaiInput>
-              <Input placeholder="ID" type="text"></Input>
+              <Input placeholder="ID" type="text" ref={userId_ref}></Input>
             </EmaiInput>
             <PasswordInput>
               <Input
                 placeholder="비밀번호"
                 type="password"
                 label="비밀번호 확인"
+                ref={password_ref}
               ></Input>
             </PasswordInput>
             <LoginBtnDiv>

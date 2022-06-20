@@ -32,8 +32,7 @@ function App() {
         <Route path="/write" element={<Write />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
-
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
