@@ -31,7 +31,7 @@ export const loginUserDB = (data) => {
       });
   };
 };
-// 로그인정보받기 (토큰이 유효기간이 30분이여서 재발급을 해주는 것 같음!)
+// 로그인정보받기
 export const loadUserDB = () => {
   return async function (dispatch) {
     await instance
