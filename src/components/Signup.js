@@ -6,6 +6,8 @@ import { createUserDB } from "../redux/modules/userSlice";
 
 function Signup() {
   const userId_ref = React.useRef(null);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const password_ref = React.useRef(null);
   const repeat_password_ref = React.useRef(null);
   const nickName_ref = React.useRef(null);
@@ -43,7 +45,7 @@ function Signup() {
       window.alert("비밀번호가 일치하지 않습니다.");
       return;
     } else {
-      dispatchEvent(
+      dispatch(
         createUserDB({
           userId: userId_ref.current.value,
           nickName: nickName_ref.current.value,
