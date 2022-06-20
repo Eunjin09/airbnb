@@ -3,12 +3,12 @@ import axios from "axios";
 //axios
 
 //댓글 작성
-export const addCommentDB = (commenthouseId) => {
+export const addCommentDB = (comment, houseId) => {
   //commenthouseId = comment, houseId Detail.js에서 객체로 받아와야 id 추가 시 정상적으로 들어감.
   return async function (dispatch) {
     try {
       await axios
-        .post(`http://localhost:5001/comments/`, commenthouseId)
+        .post(`http://localhost:8080/comment/${houseId}`, { comment, houseId })
         .then((request) => {
           dispatch(commentWrite(request.data));
           alert("후기 작성 완료");
@@ -23,16 +23,18 @@ export const addCommentDB = (commenthouseId) => {
 // 댓글 불러오기
 export const loadCommentDB = (houseId) => {
   return async function (dispatch) {
-    await axios.get(`http://localhost:5001/comments/`).then((response) => {
-      dispatch(commentLoad(response.data));
-    });
+    await axios
+      .get(`http://localhost:8080/comment/${houseId}`)
+      .then((response) => {
+        dispatch(commentLoad(response.data));
+      });
   };
 };
 
-// //댓글 삭제
+//댓글 삭제
 export const deleteCommentDB = (id) => {
   return async function (dispatch) {
-    axios.delete(`http://localhost:5001/comments/${id}`).then((response) => {
+    axios.delete(`http://localhost:8080/comments/${id}`).then((response) => {
       dispatch(commentDelete(response));
       window.location.reload();
     });

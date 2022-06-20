@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 //axios
-export const loadDetailDB = () => {
+//작성한 숙소정보 가져오기
+export const loadDetailDB = (id) => {
   return async function (dispatch) {
-    await axios.get(`url`).then((response) => {
+    await axios.get(`http://localhost:8080/detail/${id}`).then((response) => {
+      console.log(response);
       dispatch(houseLoad(response.data));
     });
   };
 };
-
-//작성한 정보 가져오기
 
 //action, action function, reducer
 export const detailSlice = createSlice({
@@ -40,4 +40,4 @@ export const detailSlice = createSlice({
 });
 
 export const { houseLoad } = detailSlice.actions;
-export default detailSlice.reducers;
+export default detailSlice.reducer;

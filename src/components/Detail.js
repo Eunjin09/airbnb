@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
-// import Map from "./Detailmap";
+import Map from "./Map";
 
 function Detail() {
   const params = useParams();
@@ -33,15 +33,27 @@ function Detail() {
 
   //댓글 불러오기
   const commentsList = useSelector((state) => state.comment.list);
-  // console.log(commentsList);
-  const [clist, setClist] = useState();
-  // clist.slice(0, 10);
+  const commentCnt = commentsList.length;
+  console.log(commentCnt);
 
   useEffect(() => {
     dispatch(CommentActions.loadCommentDB());
   }, []);
 
-  //지도
+  // 숙소정보 가져오기
+  const house = useSelector((state) => state.detaillist.list[{ houseId }]);
+  console.log(house); //{
+  //   id: 1,
+  //   address: "한국 강원도",
+  //   houseName: "숙소 이름",
+  //   image:
+  //     "https://a0.muscache.com/im/pictures/3639808c-8b04-4edf-b25a-c5e7e2adb254.jpg?im_w=1440",
+  //   price: 10000,
+  //   houseInfo: "숙소 정보",
+  //   personCnt: 3,
+  //   wifi: true,
+  //   parking: false,
+  // },
 
   return (
     <>
@@ -53,10 +65,12 @@ function Detail() {
                 marginBottom: "0px",
               }}
             >
-              house name : 블랑드누아 (2인) blanc de noir 하귀애월해안도로
+              {house.houseName}
             </h2>
             <div className="SecondBox">
-              <span>★ 4.74 후기 commentCnt개 "address"</span>
+              <span>
+                ★ 4.74 후기 {commentCnt}개 {house.address}
+              </span>
               <div
                 style={{
                   width: "100%",
@@ -93,7 +107,7 @@ function Detail() {
                 //   "url(https://a0.muscache.com/im/pictures/3639808c-8b04-4edf-b25a-c5e7e2adb254.jpg?im_w=1440)",
               }}
             >
-              image
+              {house.image}
             </div>
             <div style={{ width: "100%", maxWidth: "560px" }}>
               <div style={{ display: "flex" }}>
@@ -139,11 +153,11 @@ function Detail() {
                     marginBottom: "0px",
                   }}
                 >
-                  userName님이 호스팅하는 집의 개인실
+                  {house.userName}님이 호스팅하는 집의 개인실
                 </h2>
-                <span>최대 인원 personCnt명</span>
+                <span>최대 인원 {house.personCnt}명</span>
               </div>
-              <span>Price</span>
+              <span>{house.price}</span>
             </div>
             <Hr />
             <div className="aricoverImg" />
@@ -156,7 +170,7 @@ function Detail() {
               더 알아보기
             </p>
             <Hr />
-            <p>houseinfo</p>
+            <p>{house.houseinfo}</p>
             <Hr />
             <h2 className="BodyTitle">숙소 편의시설</h2>
             <div
@@ -239,7 +253,7 @@ function Detail() {
           >
             <FormBox>
               <h1>요금을 확인하려면 날짜를 입력하세요.</h1>
-              <p> ★ 4.74 후기 commentCnt개 </p>
+              <p> ★ 4.74 후기 {commentCnt}개 </p>
               <form>
                 <div className="check_date">
                   <div className="checkIn">
@@ -267,7 +281,7 @@ function Detail() {
                   <div className="adultBox">
                     <label>
                       <span>성인</span>
-                      <select name="adult" id="">
+                      <select name="adult" id="adult">
                         {adultcount.map((v) => {
                           return <option value={v}>{v}</option>;
                         })}
@@ -277,7 +291,7 @@ function Detail() {
                   <div className="childBox">
                     <label>
                       <span>어린이</span>
-                      <select name="child" id="">
+                      <select name="child" id="chile">
                         <option value="4">1</option>
                         <option value="8">2</option>
                         <option value="12">3</option>
@@ -307,7 +321,7 @@ function Detail() {
 
         {/* 후기/댓글 부분 */}
         <div className="Commentarea">
-          <h2 className="BodyTitle">★ 4.74 후기﹒commentCnt개</h2>
+          <h2 className="BodyTitle">★ 4.74 후기﹒{commentCnt}개</h2>
           <img
             src={reviewimg}
             alt="reviewimg"
@@ -421,29 +435,30 @@ function Detail() {
                   );
                 })}
               </div>
-              <button
-                onClick={() => {
-                  setClist();
-                }}
-              >
-                더보기
-              </button>
             </div>
             <Hr />
             {/* 숙소 지도 */}
             <h2 className="BodyTitle">호스팅 지역</h2>
-            <div id="map" style={{ width: "1000px", height: "400px" }}>
-              {/* <Map /> */}
+            <div
+              id="map"
+              style={{
+                width: "1120px",
+                height: "480px",
+                filter: "brightness(103%)",
+              }}
+            >
+              <Map />
             </div>
-            address
+            {house.address}
             <Hr />
-            <h2 className="BodyTitle">호스트: nickName님</h2>
+            <h2 className="BodyTitle">호스트: {house.nickName}님</h2>
           </div>
         </div>
       </OutterBox>
     </>
   );
 }
+
 const OutterBox = styled.div`
   width: 95%;
   max-width: 1120px;
