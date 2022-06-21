@@ -7,9 +7,7 @@ import Login from "./Login";
 import Main from "./Main";
 import Edit from "./Edit";
 import Footer from "./Footer";
-import { useDispatch, useSelector } from "react-redux";
-// import { loadUserDB } from "../redux/modules/userSlice";
-import { useEffect } from "react";
+import SearchList from "./SearchList";
 
 function App() {
   // const dispatch = useDispatch();
@@ -21,6 +19,7 @@ function App() {
   //   }
   //   load();
   // }, []);
+
   return (
     <div className="App">
       <Header></Header>
@@ -30,6 +29,7 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/edit" element={<Edit />}></Route>
         <Route path="/write" element={<Write />}></Route>
+        <Route path="/search" element={<SearchList />}></Route>
         <Route path="/detail/:id" element={<Detail />}></Route>
       </Routes>
       <Footer />
