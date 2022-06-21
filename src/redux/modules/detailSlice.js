@@ -34,7 +34,7 @@ export const detailSlice = createSlice({
   reducers: {
     //등록한 숙소 정보 불러오기
     houseLoad: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.list = action.payload;
     },
   },
