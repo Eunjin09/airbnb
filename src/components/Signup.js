@@ -112,7 +112,7 @@ const LoginBody = styled.div`
 `;
 
 const LoginBox = styled.div`
-  height: 720px;
+  height: 650px;
   width: 100%;
   max-width: 570px;
   border: 1.5px solid rgb(235, 235, 235);

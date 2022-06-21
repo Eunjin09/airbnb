@@ -11,6 +11,7 @@ import Map from "./Map";
 import { IsParking, IsWifi } from "./convienence";
 
 function Detail(props) {
+  const [isloaded, setIsloaded] = useState(false);
   const params = useParams();
   const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
   // console.log(houseId);
@@ -43,7 +44,8 @@ function Detail(props) {
   // 숙소 정보 가져오기
   const housedraft = useSelector((state) => state.detail.list);
   const house = housedraft[0];
-  console.log(house);
+  // console.log(house);
+  console.log(housedraft);
 
   // 유저 정보 가져오기
   // const user = useSelector((state) => state.user_list);
@@ -56,6 +58,7 @@ function Detail(props) {
 
   return (
     <>
+      (
       <OutterBox key={props}>
         <div className="TopBox">
           <section>
@@ -186,7 +189,11 @@ function Detail(props) {
               체크인 날짜를 선택해주세요.
             </h2>
             <span
-              style={{ color: "#8e8e8e", fontWeight: "400", fontSize: "14px" }}
+              style={{
+                color: "#8e8e8e",
+                fontWeight: "400",
+                fontSize: "14px",
+              }}
             >
               여행 날짜를 입력하여 정확한 요금을 확인하세요.
             </span>
@@ -404,6 +411,7 @@ function Detail(props) {
           </div>
         </div>
       </OutterBox>
+      )
     </>
   );
 }
