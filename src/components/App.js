@@ -9,9 +9,7 @@ import Edit from "./Edit";
 import Footer from "./Footer";
 import SearchList from "./SearchList";
 
-
 function App() {
-
   // const dispatch = useDispatch();
 
   // const token = localStorage.getItem("token");
