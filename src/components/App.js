@@ -8,7 +8,7 @@ import Main from "./Main";
 import Edit from "./Edit";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { loadUserDB } from "../redux/modules/userSlice";
+// import { loadUserDB } from "../redux/modules/userSlice";
 import { useEffect } from "react";
 
 function App() {
