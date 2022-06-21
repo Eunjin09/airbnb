@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import instance from "./axios";
+import instance from "./instance";
 
 //회원가입
 export const createUserDB = (data) => {

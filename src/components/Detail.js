@@ -6,9 +6,11 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
+import { actionCreators as ListActions } from "../redux/modules/detailSlice";
 import Map from "./Map";
+import { IsParking, IsWifi } from "./convienence";
 
-function Detail() {
+function Detail(props) {
   const params = useParams();
   const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
   // console.log(houseId);
@@ -16,48 +18,45 @@ function Detail() {
   const dispatch = useDispatch();
 
   const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
+  // const user_id = localStorage.getItem("user_id"); //로그인 여부 확인
   const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   // console.log(adultcount);
+
   //댓글 작성
   const [comment, setComment] = useState();
   const [textareaHeight, setTextareaHeight] = useState(0);
-  const commenthouseId = { comment, houseId };
   const onChange = (e) => {
     setComment(e.target.value);
     setTextareaHeight(e.target.value.split("\n").length - 1); //글 작성 시 textarea 창 늘어나기
   };
 
   const addComment = () => {
-    dispatch(CommentActions.addCommentDB({ comment, houseId }));
+    dispatch(CommentActions.addCommentDB(comment, houseId));
   };
 
   //댓글 불러오기
   const commentsList = useSelector((state) => state.comment.list);
+  console.log(commentsList);
   const commentCnt = commentsList.length;
-  console.log(commentCnt);
+  // console.log(commentCnt);
+
+  // 숙소 정보 가져오기
+  const housedraft = useSelector((state) => state.detail.list);
+  const house = housedraft[0];
+  console.log(house);
+
+  // 유저 정보 가져오기
+  // const user = useSelector((state) => state.user_list);
+  // console.log(user);
 
   useEffect(() => {
+    dispatch(ListActions.loadDetailDB());
     dispatch(CommentActions.loadCommentDB());
   }, []);
 
-  // 숙소정보 가져오기
-  const house = useSelector((state) => state.detaillist.list[{ houseId }]);
-  console.log(house); //{
-  //   id: 1,
-  //   address: "한국 강원도",
-  //   houseName: "숙소 이름",
-  //   image:
-  //     "https://a0.muscache.com/im/pictures/3639808c-8b04-4edf-b25a-c5e7e2adb254.jpg?im_w=1440",
-  //   price: 10000,
-  //   houseInfo: "숙소 정보",
-  //   personCnt: 3,
-  //   wifi: true,
-  //   parking: false,
-  // },
-
   return (
     <>
-      <OutterBox>
+      <OutterBox key={props}>
         <div className="TopBox">
           <section>
             <h2
@@ -103,12 +102,9 @@ function Detail() {
                 borderTopLeftRadius: "5%",
                 borderBottomLeftRadius: "5%",
                 margin: "0.5%",
-                // backgroundImage:
-                //   "url(https://a0.muscache.com/im/pictures/3639808c-8b04-4edf-b25a-c5e7e2adb254.jpg?im_w=1440)",
+                backgroundImage: `url(${house.image})`,
               }}
-            >
-              {house.image}
-            </div>
+            ></div>
             <div style={{ width: "100%", maxWidth: "560px" }}>
               <div style={{ display: "flex" }}>
                 <SmallImageBox
@@ -153,11 +149,11 @@ function Detail() {
                     marginBottom: "0px",
                   }}
                 >
-                  {house.userName}님이 호스팅하는 집의 개인실
+                  {/* {user.userName}님이 호스팅하는 집의 개인실 */}
                 </h2>
                 <span>최대 인원 {house.personCnt}명</span>
               </div>
-              <span>{house.price}</span>
+              <span>₩{house.price}/박</span>
             </div>
             <Hr />
             <div className="aricoverImg" />
@@ -182,56 +178,8 @@ function Detail() {
                 justifyContent: "space-between",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  gap: "2%",
-                  alignItems: "center",
-                  width: "150px",
-                }}
-              >
-                <svg
-                  viewBox="0 0 32 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  role="presentation"
-                  focusable="false"
-                  style={{
-                    display: "block",
-                    height: "24px",
-                    width: "24px",
-                    fill: "currentcolor",
-                  }}
-                >
-                  <path d="m15.9999 20.33323c2.0250459 0 3.66667 1.6416241 3.66667 3.66667s-1.6416241 3.66667-3.66667 3.66667-3.66667-1.6416241-3.66667-3.66667 1.6416241-3.66667 3.66667-3.66667zm0 2c-.9204764 0-1.66667.7461936-1.66667 1.66667s.7461936 1.66667 1.66667 1.66667 1.66667-.7461936 1.66667-1.66667-.7461936-1.66667-1.66667-1.66667zm.0001-7.33323c3.5168171 0 6.5625093 2.0171251 8.0432368 4.9575354l-1.5143264 1.5127043c-1.0142061-2.615688-3.5549814-4.4702397-6.5289104-4.4702397s-5.5147043 1.8545517-6.52891042 4.4702397l-1.51382132-1.5137072c1.48091492-2.939866 4.52631444-4.9565325 8.04273174-4.9565325zm.0001-5.3332c4.9804693 0 9.3676401 2.540213 11.9365919 6.3957185l-1.4470949 1.4473863c-2.1746764-3.5072732-6.0593053-5.8431048-10.489497-5.8431048s-8.31482064 2.3358316-10.48949703 5.8431048l-1.44709488-1.4473863c2.56895177-3.8555055 6.95612261-6.3957185 11.93659191-6.3957185zm-.0002-5.3336c6.4510616 0 12.1766693 3.10603731 15.7629187 7.9042075l-1.4304978 1.4309874c-3.2086497-4.44342277-8.4328305-7.3351949-14.3324209-7.3351949-5.8991465 0-11.12298511 2.89133703-14.33169668 7.334192l-1.43047422-1.4309849c3.58629751-4.79760153 9.31155768-7.9032071 15.7621709-7.9032071z"></path>
-                </svg>
-                <span>무선 인터넷</span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "2%",
-                  alignItems: "center",
-                  width: "150px",
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  aria-hidden="true"
-                  role="presentation"
-                  focusable="false"
-                  style={{
-                    display: "block",
-                    height: "24px",
-                    width: "24px",
-                    fill: "currentcolor",
-                  }}
-                >
-                  <path d="M26 19a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 18a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm20.693-5l.42 1.119C29.253 15.036 30 16.426 30 18v9c0 1.103-.897 2-2 2h-2c-1.103 0-2-.897-2-2v-2H8v2c0 1.103-.897 2-2 2H4c-1.103 0-2-.897-2-2v-9c0-1.575.746-2.965 1.888-3.882L4.308 13H2v-2h3v.152l1.82-4.854A2.009 2.009 0 0 1 8.693 5h14.614c.829 0 1.58.521 1.873 1.297L27 11.151V11h3v2h-2.307zM6 25H4v2h2v-2zm22 0h-2v2h2v-2zm0-2v-5c0-1.654-1.346-3-3-3H7c-1.654 0-3 1.346-3 3v5h24zm-3-10h.557l-2.25-6H8.693l-2.25 6H25zm-15 7h12v-2H10v2z"></path>
-                </svg>
-                <span>건물 내 무료주차</span>
-              </div>
+              {house.wifi ? IsWifi() : null}
+              {house.parking ? IsParking() : null}
             </div>
             <Hr />
             <h2 className="BodyTitle" style={{ marginBottom: "2px" }}>
@@ -358,7 +306,7 @@ function Detail() {
               ) : (
                 <button
                   onClick={() => {
-                    dispatch(addComment);
+                    dispatch(addComment());
                     // console.log(comment);
                   }}
                 >
@@ -368,7 +316,7 @@ function Detail() {
             </div>
             <div>
               <div className="CommentList">
-                {commentsList.map((comment, index) => {
+                {commentsList.map((commentvalue, index) => {
                   return (
                     <div
                       style={{
@@ -392,17 +340,17 @@ function Detail() {
                           }}
                         >
                           <span style={{ fontSize: "16px" }}>
-                            닉네임: {comment.nickName}
+                            {commentvalue.nickName}
                           </span>
                           <span style={{ color: "gray", fontSize: "14px" }}>
-                            등록일: {comment.createdAt}
+                            등록일: {commentvalue.createdAt}
                           </span>
                         </div>
                         <br />
                       </div>
                       <div>
                         <div style={{ margin: "1% 3% 2% 3%" }}>
-                          <span>{comment.comment}</span>
+                          <span>{commentvalue.comment}</span>
                         </div>
                       </div>
                       <div
@@ -417,12 +365,12 @@ function Detail() {
                           <button
                             onClick={() => {
                               console.log("삭제버튼 클릭");
-                              // console.log(comment.id);
+                              // console.log(commentvalue.id);
                               dispatch(
-                                // commentDelete(comment.id)
+                                // commentDelete(commentvalue.id)
                                 CommentActions.deleteCommentDB(
-                                  comment.id
-                                  // comment.nickName
+                                  commentvalue.id
+                                  // commentvalue.nickName
                                 )
                               );
                             }}
@@ -445,13 +393,14 @@ function Detail() {
                 width: "1120px",
                 height: "480px",
                 filter: "brightness(103%)",
+                marginBottom: "3%",
               }}
             >
               <Map />
             </div>
             {house.address}
             <Hr />
-            <h2 className="BodyTitle">호스트: {house.nickName}님</h2>
+            {/* <h2 className="BodyTitle">호스트: {user.nickName}님</h2> */}
           </div>
         </div>
       </OutterBox>
