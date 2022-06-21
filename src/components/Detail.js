@@ -12,15 +12,14 @@ import { IsParking, IsWifi } from "./convienence";
 
 function Detail(props) {
   const params = useParams();
-  const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
+  // const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
   // console.log(houseId);
+  const houseId = Number(params.id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
-  // const user_id = localStorage.getItem("user_id"); //로그인 여부 확인
   const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  // console.log(adultcount);
 
   //댓글 작성
   const [comment, setComment] = useState();
@@ -36,22 +35,20 @@ function Detail(props) {
 
   //댓글 불러오기
   const commentsList = useSelector((state) => state.comment.list);
-  console.log(commentsList);
   const commentCnt = commentsList.length;
-  // console.log(commentCnt);
+
+  //댓글 더보기
+  const [limit, setLimit] = useState(2);
+  const moreComment = commentsList.slice(0, limit);
 
   // 숙소 정보 가져오기
   const housedraft = useSelector((state) => state.detail.list);
   const house = housedraft[0];
-  console.log(house);
-
-  // 유저 정보 가져오기
-  // const user = useSelector((state) => state.user_list);
-  // console.log(user);
+  // console.log(house);
 
   useEffect(() => {
-    dispatch(ListActions.loadDetailDB());
-    dispatch(CommentActions.loadCommentDB());
+    dispatch(ListActions.loadDetailDB(params.id));
+    dispatch(CommentActions.loadCommentDB(params.id));
   }, []);
 
   return (
@@ -149,7 +146,7 @@ function Detail(props) {
                     marginBottom: "0px",
                   }}
                 >
-                  {/* {user.userName}님이 호스팅하는 집의 개인실 */}
+                  {user_name}님이 호스팅하는 집의 개인실
                 </h2>
                 <span>최대 인원 {house.personCnt}명</span>
               </div>
@@ -166,7 +163,7 @@ function Detail(props) {
               더 알아보기
             </p>
             <Hr />
-            <p>{house.houseinfo}</p>
+            <p>{house.houseInfo}</p>
             <Hr />
             <h2 className="BodyTitle">숙소 편의시설</h2>
             <div
@@ -316,7 +313,7 @@ function Detail(props) {
             </div>
             <div>
               <div className="CommentList">
-                {commentsList.map((commentvalue, index) => {
+                {moreComment.map((commentvalue, index) => {
                   return (
                     <div
                       style={{
@@ -365,13 +362,8 @@ function Detail(props) {
                           <button
                             onClick={() => {
                               console.log("삭제버튼 클릭");
-                              // console.log(commentvalue.id);
                               dispatch(
-                                // commentDelete(commentvalue.id)
-                                CommentActions.deleteCommentDB(
-                                  commentvalue.id
-                                  // commentvalue.nickName
-                                )
+                                CommentActions.deleteCommentDB(commentvalue.id)
                               );
                             }}
                           >
@@ -383,6 +375,9 @@ function Detail(props) {
                   );
                 })}
               </div>
+              <button onClick={() => setLimit((prev) => prev + 2)}>
+                더보기
+              </button>
             </div>
             <Hr />
             {/* 숙소 지도 */}
@@ -400,7 +395,7 @@ function Detail(props) {
             </div>
             {house.address}
             <Hr />
-            {/* <h2 className="BodyTitle">호스트: {user.nickName}님</h2> */}
+            <h2 className="BodyTitle">호스트: {user_name}님</h2>
           </div>
         </div>
       </OutterBox>

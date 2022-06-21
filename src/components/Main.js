@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import reset from "../reset.css";
 
 function Main() {
   return (

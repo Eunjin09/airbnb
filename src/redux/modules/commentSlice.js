@@ -6,16 +6,13 @@ import instance from "./instance";
 //댓글 작성
 export const addCommentDB = (comment, houseId) => {
   const data = { comment, houseId };
-  console.log(data);
-  // debugger;
-  // const data = [...comment, houseId]
-  //commenthouseId = comment, houseId Detail.js에서 객체로 받아와야 id 추가 시 정상적으로 들어감.
+
   return async function (dispatch) {
     try {
-      await instance.post(`/comment/${houseId}`, data).then((request) => {
-        console.log(request);
+      await instance.post(`/api/comment/${houseId}`, data).then((request) => {
         dispatch(commentWrite(request.data));
-        console.log("후기 작성 완료");
+        window.alert(request.data.message);
+        console.log(request.data.status);
         window.location.reload();
       });
     } catch (error) {
@@ -27,7 +24,8 @@ export const addCommentDB = (comment, houseId) => {
 // 댓글 불러오기
 export const loadCommentDB = (houseId) => {
   return async function (dispatch) {
-    await instance.get(`/comment/${houseId}`).then((response) => {
+    await instance.get(`/api/comment/${houseId}`).then((response) => {
+      console.log(response);
       dispatch(commentLoad(response.data));
     });
   };
@@ -36,12 +34,16 @@ export const loadCommentDB = (houseId) => {
 //댓글 삭제
 export const deleteCommentDB = (id) => {
   return async function (dispatch) {
-    instance
-      .delete(`http://3.34.185.191/api/comments/${id}`)
-      .then((response) => {
+    await instance.delete(`/api/comment/${id}`).then((response) => {
+      try {
+        window.alert(response.data.message);
+        console.log(response.data.status);
         dispatch(commentDelete(response));
         window.location.reload();
-      });
+      } catch (error) {
+        console.log("failed", response.data.message);
+      }
+    });
   };
 };
 
@@ -49,22 +51,14 @@ export const deleteCommentDB = (id) => {
 export const commentSlice = createSlice({
   name: "comments",
   initialState: {
-    list: [
-      {
-        id: 1,
-        houseId: 1,
-        nickName: "이름",
-        comment: "안녕하세요",
-        createdAt: "2022년 6월",
-      },
-    ],
+    list: [],
   },
   reducers: {
     //댓글 저장
     commentWrite: (state, action) => {
       const new_commentlist = state.list.push(action.payload);
       state.list = new_commentlist;
-      console.log(new_commentlist);
+      // console.log(new_commentlist);
     },
     //댓글 불러오기
     commentLoad: (state, action) => {
@@ -82,8 +76,6 @@ export const commentSlice = createSlice({
 });
 
 // action creator export
-// const actionCreators = {db}
-// export {actionCreators};
 const actionCreators = {
   addCommentDB,
   loadCommentDB,
