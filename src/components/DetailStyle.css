@@ -56,9 +56,7 @@
 
 .CommentList {
   display: flex;
-  flex-direction: column-reverse;
-  white-space: nowrap;
-  overflow: auto;
+  flex-direction: column;
   height: auto;
 }
 
@@ -77,5 +75,9 @@
 }
 
 .personCnt {
+  display: flex;
+}
+
+.Calendar {
   display: flex;
 }
