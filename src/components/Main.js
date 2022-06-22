@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import GlobalStyle from "./GlobalStyle";
 
 function Main() {
   return (
     <>
+      <GlobalStyle />
       <MainBox>
         <BackImg />
         <FormBox>
