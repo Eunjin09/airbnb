@@ -4,6 +4,26 @@
       "id": 1,
       "title": "json-server",
       "author": "typicode"
+    },
+    {
+      "address": "대전 동구 판교1길 3",
+      "houseName": "동구아파트",
+      "houseInfo": "우리 숙소 만원",
+      "price": 10000,
+      "personCnt": "12명",
+      "wifi": "와이파이 있음",
+      "parking": "주차 가능",
+      "id": 2
+    },
+    {
+      "address": "서울 성북구 아리랑로 3",
+      "houseName": "숙소 이름",
+      "houseInfo": "숙소 설명",
+      "price": 10000,
+      "personCnt": "4명",
+      "wifi": "와이파이 없음",
+      "parking": "주차 불가능",
+      "id": 3
     }
   ],
   "comments": [

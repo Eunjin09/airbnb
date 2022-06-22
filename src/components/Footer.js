@@ -28,6 +28,7 @@ const FooterDiv = styled.div`
 `;
 
 const CopyRight = styled.div`
+  background-color: aliceblue;
   display: flex;
   // border-top: 1px solid rgb(221, 221, 221);
   font-size: 0.9rem;
