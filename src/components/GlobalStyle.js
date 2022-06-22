@@ -1,5 +1,9 @@
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+// GlobalStyle.jsx
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap'); */
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -26,7 +30,7 @@ time, mark, audio, video {
 
 }
 /* HTML5 display-role reset for older browsers */
-/* article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -69,4 +73,8 @@ input{
 }
 button {
   border: none;
-} */
+}
+
+`;
+
+export default GlobalStyle;
