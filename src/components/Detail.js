@@ -31,12 +31,6 @@ function Detail(props) {
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   // console.log(price);
 
-  console.log(housedraft);
-
-  // 유저 정보 가져오기
-  // const user = useSelector((state) => state.user_list);
-  // console.log(user);
-
   useEffect(() => {
     dispatch(ListActions.loadDetailDB(params.id));
   }, []);
