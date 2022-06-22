@@ -47,6 +47,7 @@ function Comment(props) {
               gap: "1%",
               margin: "2% 0",
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <textarea

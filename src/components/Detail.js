@@ -9,7 +9,7 @@ import Map from "./Map";
 import { IsParking, IsWifi } from "./convienence";
 import Comment from "./Comment";
 import "./Calendar.css";
-import Calendar from "./Calendar";
+import { Calendar, CalendarNext } from "./Calendar";
 
 function Detail(props) {
   const params = useParams();
@@ -41,7 +41,7 @@ function Detail(props) {
           <section>
             <h2
               style={{
-                marginBottom: "0px",
+                marginBottom: "1%",
               }}
             >
               {house.houseName}
@@ -86,19 +86,11 @@ function Detail(props) {
             </div>
           </section>
           <div className="ImageBox">
-            <div
+            <BigImage
               style={{
-                margin: "0.5%",
-                width: "100%",
-                maxWidth: "56vw",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                borderTopLeftRadius: "5%",
-                borderBottomLeftRadius: "5%",
                 backgroundImage: `url(${house.image})`,
               }}
-            ></div>
+            ></BigImage>
             <div style={{ width: "100%", maxWidth: "560px" }}>
               <div style={{ display: "flex" }}>
                 <SmallImageBox
@@ -140,7 +132,7 @@ function Detail(props) {
               <div>
                 <h2
                   style={{
-                    marginBottom: "0px",
+                    marginBottom: "1%",
                   }}
                 >
                   {house.nickName}님이 호스팅하는 집의 개인실
@@ -190,13 +182,14 @@ function Detail(props) {
             </span>
             <div className="Calendar">
               <Calendar />
-              <Calendar />
+              <CalendarNext />
             </div>
           </InfoOutterBox>
           <div
             style={{
               width: "350px",
               backgroundSize: "cover",
+              position: "relative",
             }}
           >
             <FormBox>
@@ -293,7 +286,6 @@ function Detail(props) {
           />
           <div className="CommentBox">
             <Comment />
-
             {/* 숙소 지도 */}
             <h2 className="BodyTitle">호스팅 지역</h2>
             <div
@@ -301,15 +293,50 @@ function Detail(props) {
               style={{
                 width: "1120px",
                 height: "480px",
-                filter: "brightness(103%)",
+                filter: "brightness(107%) saturate(140%) hue-rotate(-10deg)",
                 marginBottom: "3%",
               }}
             >
               <Map />
             </div>
-            {house.address}
+            <div style={{ fontWeight: "600", marginBottom: "1%" }}>
+              {house.address}
+            </div>
+            <p>
+              일단 걸어볼까요.
+              <br /> 주변의 맛집들이 기다리고 있습니다...!!
+            </p>
+            <span style={{ fontWeight: "600", textDecoration: "underline" }}>
+              더 보기
+            </span>{" "}
+            ＞
             <Hr />
             <h2 className="BodyTitle">호스트: {house.nickName}님</h2>
+            <div style={{ display: "flex", margin: "auto" }}>
+              <div style={{ width: "300px" }}>
+                모던한 스타일의 인테리어를 자랑하는 감성충만 스테이입니다. 가족,
+                연인, 친구와 소중한 추억을 만들어 가세요.
+                <div>
+                  <br />
+                  <p style={{ fontWeight: "600" }}>숙박 중 게스트와의 교류</p>
+                  숙소 맞은 편 파란 지붕집에서 도움을 드리고 있습니다.
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "300px",
+                  marginLeft: "3%",
+                }}
+              >
+                <span>응답률: 100%</span>
+                <span>응답 시간: 1시간 이내</span>
+                <br />
+                <HostButton>호스트에게 연락하기</HostButton>
+              </div>
+            </div>
           </div>
         </div>
       </OutterBox>
@@ -323,6 +350,20 @@ const OutterBox = styled.div`
   margin: auto;
 `;
 
+const BigImage = styled.div`
+  margin: 0.5%;
+  width: 100%;
+  max-width: 56vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+  &:hover {
+    filter: brightness(70%);
+  }
+`;
+
 const SmallImageBox = styled.div`
   width: 100%;
   max-width: 28vw;
@@ -330,7 +371,7 @@ const SmallImageBox = styled.div`
   height: 20vh;
   background-size: cover;
   &:hover {
-    filter: brightness(50%);
+    filter: brightness(70%);
   }
 `;
 
@@ -431,6 +472,16 @@ const SearchBtn = styled.button`
   }
   border: none;
   padding: 6%;
+`;
+
+const HostButton = styled.div`
+  border: 1px solid;
+  padding: 13px 23px;
+  width: 150px;
+  height: auto;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
 `;
 
 export default Detail;

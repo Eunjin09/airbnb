@@ -51,7 +51,9 @@
 
 .InputComment {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1030px;
+  border: none;
+  border-bottom: 1px solid #000;
 }
 
 .CommentList {
@@ -80,4 +82,5 @@
 
 .Calendar {
   display: flex;
+  gap: 2%;
 }

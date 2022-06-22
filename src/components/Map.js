@@ -13,7 +13,7 @@ const Map = () => {
     let container = document.getElementById("map");
     let options = {
       center: new window.kakao.maps.LatLng(37.5023088, 127.044437),
-      level: 4,
+      level: 6,
     };
     let map = new window.kakao.maps.Map(container, options);
 
