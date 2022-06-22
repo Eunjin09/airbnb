@@ -6,8 +6,8 @@ import { createUserDB } from "../redux/modules/userSlice";
 
 function Signup() {
   const userId_ref = React.useRef(null);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const password_ref = React.useRef(null);
   const repeat_password_ref = React.useRef(null);
   const nickName_ref = React.useRef(null);

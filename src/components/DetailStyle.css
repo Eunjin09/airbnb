@@ -57,6 +57,9 @@
 .CommentList {
   display: flex;
   flex-direction: column-reverse;
+  white-space: nowrap;
+  overflow: auto;
+  height: auto;
 }
 
 .profileImg {

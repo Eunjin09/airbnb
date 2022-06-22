@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import DaumPostCode from 'react-daum-postcode'
+import DaumPostCode from "react-daum-postcode";
 import { useState } from "react";
 import { useRef } from "react";
 import GlobalStyle from "./GlobalStyle";
@@ -10,8 +10,6 @@ import { addPostDB } from "../redux/modules/listSlice";
 // 파이어베이스 (이미지업로드)
 import { storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-
-
 
 function Write() {
   const dispatch = useDispatch();
@@ -92,8 +90,8 @@ function Write() {
   const checked = (data) => {
     let array = [houseName, address, houseInfo, price, personCnt, wifi, parking];
     for (let i = 0; i < array.length; i++) {
-      if (array[i] === '') {
-        alert('내용을 입력해주세요!')
+      if (array[i] === "") {
+        alert("내용을 입력해주세요!");
         break;
       }
       return true;
@@ -345,33 +343,34 @@ function Write() {
 
 const ScreenLeft = styled.div`
   position: relative;
-    width:50vw;
-    height:100vh;
-    background:linear-gradient(178.4deg, #D32677 1.28%, #441CA2 79.48%);
-  h1{
+  width: 50vw;
+  height: 100vh;
+  background: linear-gradient(178.4deg, #d32677 1.28%, #441ca2 79.48%);
+  h1 {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    color:#fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
     font-size: 40px;
     width: 80%;
     text-align: center;
   }
-`
+`;
 const ScreenRight = styled.div`
   position: relative;
-  width:50vw;
-  height:100vh;
-  background:white;
-  padding : 22px 80px;
+  width: 50vw;
+  height: 100vh;
+  background: white;
+  padding: 22px 80px;
   border: 1px solid #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 const InputBox = styled.div`
-  margin-bottom:24px;
-  text-align:left;
+  margin-bottom: 24px;
+  text-align: left;
   box-sizing: border-box;
 
   button {
@@ -383,50 +382,50 @@ const InputBox = styled.div`
     height: 40px;
   }
 
-.fileBox {
-  background: #8A4396;
-  padding: 10px 25px;
-  border-radius: 10px;
-  color: #fff;
-  display: inline-block;
-}
-`
+  .fileBox {
+    background: #8a4396;
+    padding: 10px 25px;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+  }
+`;
 const Textarea = styled.p`
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:8px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
   span {
     display: inline-block;
     font-size: 12px;
     margin-top: 2px;
   }
-`
+`;
 const Inputarea = styled.input`
   width: 100%;
-  padding : 10px;
-  border-radius:10px;
+  padding: 10px;
+  border-radius: 10px;
   border: 1px solid #d2d2d2;
-`
+`;
 const Select = styled.select`
-  font-size:15px;
+  font-size: 15px;
   padding: 10px 20px;
-  border:none;
-  border-radius:20px;
-  text-align:center;
-  background:#eee;
-  font-weight:bold;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  background: #eee;
+  font-weight: bold;
   margin-right: 20px;
   margin-top: 10px;
-`
+`;
 const Submit = styled.button`
   width: 150px;
   padding: 10px 30px;
-  margin-top : 10px;
-  font-size:16px;
-  color:white;
+  margin-top: 10px;
+  font-size: 16px;
+  color: white;
   background: blue;
-  border:none;
-  border-radius:12px;
-  font-weight:bold;
-`
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+`;
 export default Write;

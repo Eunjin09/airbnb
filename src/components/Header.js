@@ -16,8 +16,15 @@ const Header = () => {
   return (
     <HeadDiv>
       <Center>
-        <div>
-          <img src={logo} width="100px" style={{ paddingLeft: " 15px" }} />
+        <div style={{ cursor: "pointer" }}>
+          <img
+            src={logo}
+            width="100px"
+            style={{ paddingLeft: " 15px" }}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
         </div>
         <Btn>
           <p>{user_name}</p>
