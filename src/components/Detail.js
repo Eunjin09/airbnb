@@ -88,12 +88,14 @@ function Detail(props) {
           <div className="ImageBox">
             <div
               style={{
+                margin: "0.5%",
                 width: "100%",
-                maxWidth: "560px",
+                maxWidth: "56vw",
                 backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
                 borderTopLeftRadius: "5%",
                 borderBottomLeftRadius: "5%",
-                margin: "0.5%",
                 backgroundImage: `url(${house.image})`,
               }}
             ></div>
