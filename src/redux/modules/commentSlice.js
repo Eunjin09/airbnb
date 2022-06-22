@@ -62,7 +62,7 @@ export const commentSlice = createSlice({
     },
     //댓글 불러오기
     commentLoad: (state, action) => {
-      state.list = action.payload;
+      state.list = action.payload.sort((a, b) => b.id - a.id);
       // console.log(state.list);
     },
     //댓글 삭제

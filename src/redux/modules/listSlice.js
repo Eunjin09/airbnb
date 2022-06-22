@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import { createSlice } from "@reduxjs/toolkit";
 import instance from "./instance";
 
@@ -34,16 +35,26 @@ export const addPostDB = (data) => {
 };
 
 //게시글 삭제
-export const deletePostDB = (data) => {
+export const deletePostDB = (id) => {
   return async function (dispatch) {
-    await instance.delete(`/api/house/${data}`).then((response) => {
-      console.log("삭제 리스폰스", response.data);
-      dispatch(deletePostDB(data));
+    await instance.delete(`/api/house/${id}`).then((response) => {
+      console.log("삭제 리스폰스", response.data, `/api/house/${id}`);
+      dispatch(deletePostDB(id));
       window.location.replace("/");
     });
   };
 };
 
+//게시글 수정
+export const updatePostDB = (id) => {
+  return async function (dispatch) {
+    await instance.put(`/api/house/${id}`).then((response) => {
+      console.log("수정 리스폰스");
+      dispatch(updatePostDB(id));
+      window.location.replace("/");
+    });
+  };
+};
 // 리듀서
 const listSlice = createSlice({
   name: "post",
@@ -65,8 +76,15 @@ const listSlice = createSlice({
       const new_post = state.post_list.filter((v, i) => i !== action.payload);
       state.post_list = new_post;
     },
+    //수정
+    updatePost: (state, action) => {
+      const index = state.post_list.findIndex(
+        (v) => v.id === action.payload.id
+      );
+      state.post_list[index] = action.payload;
+    },
   },
 });
 
-export const { addPost, loadPost, deletePost } = listSlice.actions;
+export const { addPost, loadPost, deletePost, updatePost } = listSlice.actions;
 export default listSlice.reducer;

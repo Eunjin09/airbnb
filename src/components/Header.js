@@ -27,7 +27,7 @@ const Header = () => {
           />
         </div>
         <Btn>
-          <p>{user_name}</p>
+          <p>{user_name} 님</p>
           {user_name ? (
             <>
               <button
