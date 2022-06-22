@@ -24,13 +24,6 @@ function Write() {
 
   // 숙소 정보 가져오기
   const housedraft = useSelector((state) => state.detail.list);
-  // console.log(housedraft);
-  // const house = housedraft[0];
-  // console.log(housedraft[0].houseName);
-  // const price = Number(housedraft[0].price)
-  //   .toString()
-  //   .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  // console.log(price);
 
   useEffect(() => {
     async function load() {
@@ -42,18 +35,8 @@ function Write() {
   // 주소 찾기 모달 상태(opend-> 불리언값으로 한번에 보이도록 하자)
   const [opened, setOpened] = useState();
 
-  // 사진 업로드
-  // const fileInput = useRef(null);
-  // const [imgUrl, setImgUrl] = React.useState(null)
-
   // 파일 첨부시 이벤트 발생
-  const uploadImg = async (e) => {
-    // const file_path = 'image/' + new Date().getTime()
-    // const uploaded_file = await uploadBytes(ref(storage, file_path), e.target.files[0])
-    // const file_url = await getDownloadURL(uploaded_file.ref)
-    // thumbnail_ref.current = { url: file_url }
-    // setImgUrl(thumbnail_ref.current.url)
-  };
+  const uploadImg = async (e) => {};
 
   // 이미지 업로드
   const fileInput = React.useRef();
@@ -173,7 +156,7 @@ function Write() {
 
     if (checked(getInputs) === true) {
       console.log("w준비완료!");
-      dispatch(updatePostDB(getInputs));
+      dispatch(updatePostDB(params.id, getInputs));
     }
   };
 
