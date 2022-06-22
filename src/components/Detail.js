@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
 import { actionCreators as ListActions } from "../redux/modules/detailSlice";
+import { deletePostDB } from "../redux/modules/listSlice";
 import Map from "./Map";
 import { IsParking, IsWifi } from "./convienence";
 
@@ -18,6 +19,7 @@ function Detail(props) {
   const houseId = Number(params.id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(houseId);
 
   const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
   const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -83,7 +85,12 @@ function Detail(props) {
                   justifyContent: "space-between",
                 }}
               >
-                <button className="ButtonTransparent" onClick={() => {}}>
+                <button
+                  className="ButtonTransparent"
+                  onClick={() => {
+                    dispatch(deletePostDB(houseId + 1));
+                  }}
+                >
                   삭제
                 </button>
                 <button
