@@ -1,115 +1,138 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
+import "./Calendar.css";
+import { Calendar, CalendarNext } from "./Calendar";
 import reviewimg from "../image/reviewrank.png";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import safeimg from "../image/safeimg.svg";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { actionCreators as CommentActions } from "../redux/modules/commentSlice";
 import { actionCreators as ListActions } from "../redux/modules/detailSlice";
-import Map from "./Map";
+import { deletePostDB } from "../redux/modules/listSlice";
 import { IsParking, IsWifi } from "./convienence";
+import Comment from "./Comment";
+import Map from "./Map";
 
 function Detail(props) {
-  const [isloaded, setIsloaded] = useState(false);
   const params = useParams();
-  // const houseId = Number(params.id) + 1; //houseId 는 1부터 시작이라 parameter 에 1을 더해야 순서가 맞음.
-  // console.log(houseId);
-  const houseId = Number(params.id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
   const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-  //댓글 작성
-  const [comment, setComment] = useState();
-  const [textareaHeight, setTextareaHeight] = useState(0);
-  const onChange = (e) => {
-    setComment(e.target.value);
-    setTextareaHeight(e.target.value.split("\n").length - 1); //글 작성 시 textarea 창 늘어나기
-  };
-
-  const addComment = () => {
-    dispatch(CommentActions.addCommentDB(comment, houseId));
-  };
-
-  //댓글 불러오기
+  //댓글 불러오기 (commentCnt 필요해서)
   const commentsList = useSelector((state) => state.comment.list);
   const commentCnt = commentsList.length;
 
-  //댓글 더보기
-  const [limit, setLimit] = useState(2);
-  const moreComment = commentsList.slice(0, limit);
+  const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
 
   // 숙소 정보 가져오기
   const housedraft = useSelector((state) => state.detail.list);
+  // console.log(housedraft);
   const house = housedraft[0];
-  // console.log(house);
-
-  console.log(housedraft);
-
-  // 유저 정보 가져오기
-  // const user = useSelector((state) => state.user_list);
-  // console.log(user);
+  const price = Number(house.price)
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // console.log(price);
 
   useEffect(() => {
     dispatch(ListActions.loadDetailDB(params.id));
-    dispatch(CommentActions.loadCommentDB(params.id));
   }, []);
 
   return (
-    <>
-      (
+    <div style={{ borderTop: "1px solid #ddd" }}>
       <OutterBox key={props}>
         <div className="TopBox">
           <section>
             <h2
               style={{
-                marginBottom: "0px",
+                marginBottom: "1%",
               }}
             >
               {house.houseName}
             </h2>
             <div className="SecondBox">
               <span>
-                ★ 4.74 후기 {commentCnt}개 {house.address}
+                ★ 4.74﹒
+                <span
+                  style={{ textDecoration: "underline", fontWeight: "600" }}
+                >
+                  후기 {commentCnt}개
+                </span>
+                ﹒슈퍼호스트﹒
+                <span
+                  style={{ textDecoration: "underline", fontWeight: "600" }}
+                >
+                  {house.address}
+                </span>
               </span>
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: "200px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <button className="ButtonTransparent" onClick={() => {}}>
-                  삭제
-                </button>
-                <button
-                  className="ButtonTransparent"
-                  onClick={() => {
-                    navigate("/edit");
+
+              {user_name ? (
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "150px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginRight: "1%",
                   }}
                 >
-                  수정
-                </button>
-                <button className="ButtonTransparent">저장</button>
-              </div>
+                  <button
+                    className="ButtonTransparent"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      dispatch(deletePostDB(params.id));
+                    }}
+                  >
+                    삭제
+                  </button>
+                  <button
+                    className="ButtonTransparent"
+                    onClick={() => {
+                      navigate(`/edit/` + params.id);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button className="ButtonTransparent">♡ 저장</button>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "150px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginRight: "1%",
+                  }}
+                >
+                  <button
+                    className="ButtonTransparent"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      alert("로그인이 필요합니다.");
+                    }}
+                  >
+                    삭제
+                  </button>
+                  <button
+                    className="ButtonTransparent"
+                    onClick={() => {
+                      alert("로그인이 필요합니다.");
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button className="ButtonTransparent">♡ 저장</button>
+                </div>
+              )}
             </div>
           </section>
           <div className="ImageBox">
-            <div
+            <BigImage
               style={{
-                width: "100%",
-                maxWidth: "560px",
-                backgroundSize: "cover",
-                borderTopLeftRadius: "5%",
-                borderBottomLeftRadius: "5%",
-                margin: "0.5%",
                 backgroundImage: `url(${house.image})`,
               }}
-            ></div>
+            ></BigImage>
             <div style={{ width: "100%", maxWidth: "560px" }}>
               <div style={{ display: "flex" }}>
                 <SmallImageBox
@@ -151,14 +174,14 @@ function Detail(props) {
               <div>
                 <h2
                   style={{
-                    marginBottom: "0px",
+                    marginBottom: "1%",
                   }}
                 >
-                  {user_name}님이 호스팅하는 집의 개인실
+                  {house.nickName}님이 호스팅하는 집의 개인실
                 </h2>
                 <span>최대 인원 {house.personCnt}명</span>
               </div>
-              <span>₩{house.price}/박</span>
+              <span>₩{price} /박</span>
             </div>
             <Hr />
             <div className="aricoverImg" />
@@ -199,13 +222,16 @@ function Detail(props) {
             >
               여행 날짜를 입력하여 정확한 요금을 확인하세요.
             </span>
-            <div className="Calendar"></div>
-            달력 react-calendar? react-datepicker? moment?
+            <div className="Calendar">
+              <Calendar />
+              <CalendarNext />
+            </div>
           </InfoOutterBox>
           <div
             style={{
               width: "350px",
               backgroundSize: "cover",
+              position: "relative",
             }}
           >
             <FormBox>
@@ -269,6 +295,21 @@ function Detail(props) {
                   textDecoration: "underline 2px",
                 }}
               >
+                <svg
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                  role="presentation"
+                  focusable="false"
+                  style={{
+                    height: "16px",
+                    width: "16px",
+                    fill: "currentcolor",
+                    marginRight: "5%",
+                  }}
+                >
+                  <path d="M28 6H17V4a2 2 0 0 0-2-2H3v28h2V18h10v2a2 2 0 0 0 2 2h11l.115-.006a1 1 0 0 0 .847-1.269L27.039 14l1.923-6.724A1 1 0 0 0 28 6z"></path>
+                </svg>{" "}
                 숙소 신고하기
               </p>
             </FormBox>
@@ -286,112 +327,7 @@ function Detail(props) {
             max-width="1120px"
           />
           <div className="CommentBox">
-            <div
-              style={{
-                display: "flex",
-                gap: "1%",
-                margin: "2% 0",
-                justifyContent: "center",
-              }}
-            >
-              <textarea
-                type="text"
-                className="InputComment"
-                placeholder="300자 이내로 후기를 작성해주세요."
-                onChange={onChange}
-                value={comment}
-                style={{ height: (textareaHeight + 1) * 27 + "px" }}
-                maxLength="300" //300자 제한
-              ></textarea>
-              {!user_name ? (
-                <button
-                  onClick={() => {
-                    alert("로그인이 필요합니다.");
-                    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-                  }}
-                >
-                  작성
-                </button>
-              ) : (
-                <button
-                  onClick={() => {
-                    dispatch(addComment());
-                    // console.log(comment);
-                  }}
-                >
-                  작성
-                </button>
-              )}
-            </div>
-            <div>
-              <div className="CommentList">
-                {moreComment.map((commentvalue, index) => {
-                  return (
-                    <div
-                      style={{
-                        margin: "1%",
-                        // backgroundColor: "rgb(242 235 208)",
-                      }}
-                      key={index}
-                    >
-                      <div
-                        style={{
-                          margin: "2% 0% 0% 2%",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        <div className="profileImg" alt="profileImg" />
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                          }}
-                        >
-                          <span style={{ fontSize: "16px" }}>
-                            {commentvalue.nickName}
-                          </span>
-                          <span style={{ color: "gray", fontSize: "14px" }}>
-                            등록일: {commentvalue.createdAt}
-                          </span>
-                        </div>
-                        <br />
-                      </div>
-                      <div>
-                        <div style={{ margin: "1% 3% 2% 3%" }}>
-                          <span>{commentvalue.comment}</span>
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          margin: "1% 2%",
-                          display: "flex",
-                          justifyContent: "flex-end",
-                        }}
-                      >
-                        {/* <button onClick={() => {}}>수정</button> */}
-                        {user_name ? (
-                          <button
-                            onClick={() => {
-                              console.log("삭제버튼 클릭");
-                              dispatch(
-                                CommentActions.deleteCommentDB(commentvalue.id)
-                              );
-                            }}
-                          >
-                            삭제
-                          </button>
-                        ) : null}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <button onClick={() => setLimit((prev) => prev + 2)}>
-                더보기
-              </button>
-            </div>
-            <Hr />
+            <Comment />
             {/* 숙소 지도 */}
             <h2 className="BodyTitle">호스팅 지역</h2>
             <div
@@ -399,20 +335,74 @@ function Detail(props) {
               style={{
                 width: "1120px",
                 height: "480px",
-                filter: "brightness(103%)",
+                filter: "brightness(107%) saturate(140%) hue-rotate(-10deg)",
                 marginBottom: "3%",
               }}
             >
               <Map />
             </div>
-            {house.address}
+            <div style={{ fontWeight: "600", marginBottom: "1%" }}>
+              {house.address}
+            </div>
+            <p>
+              일단 걸어볼까요.
+              <br /> 주변의 맛집들이 기다리고 있습니다...!!
+            </p>
+            <span style={{ fontWeight: "600", textDecoration: "underline" }}>
+              더 보기
+            </span>{" "}
+            ＞
             <Hr />
-            <h2 className="BodyTitle">호스트: {user_name}님</h2>
+            <h2 className="BodyTitle">호스트: {house.nickName}님</h2>
+            <div style={{ display: "flex", margin: "auto" }}>
+              <div style={{ width: "300px" }}>
+                모던한 스타일의 인테리어를 자랑하는 감성충만 스테이입니다. 가족,
+                연인, 친구와 소중한 추억을 만들어 가세요.
+                <div>
+                  <br />
+                  <p style={{ fontWeight: "600" }}>숙박 중 게스트와의 교류</p>
+                  숙소 맞은 편 파란 지붕집에서 도움을 드리고 있습니다.
+                </div>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "300px",
+                  marginLeft: "3%",
+                }}
+              >
+                <span>응답률: 100%</span>
+                <span>응답 시간: 1시간 이내</span>
+                <br />
+                <HostButton>호스트에게 연락하기</HostButton>
+
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "500px",
+                    display: "flex",
+                    gap: "2%",
+                    marginTop: "6%",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ width: "100%", maxWidth: "30px" }}>
+                    <img src={safeimg} alt="safeimg" />
+                  </div>
+
+                  <span style={{ fontSize: "13px" }}>
+                    안전한 결제를 위해 에어비앤비 웹사이트나 앱 외부에서
+                    송금하거나 대화를 나누지 마세요.
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </OutterBox>
-      )
-    </>
+    </div>
   );
 }
 
@@ -420,7 +410,20 @@ const OutterBox = styled.div`
   width: 95%;
   max-width: 1120px;
   margin: auto;
-  border-top: 1px solid #ddd;
+`;
+
+const BigImage = styled.div`
+  margin: 0.5%;
+  width: 100%;
+  max-width: 56vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+  &:hover {
+    filter: brightness(70%);
+  }
 `;
 
 const SmallImageBox = styled.div`
@@ -430,7 +433,7 @@ const SmallImageBox = styled.div`
   height: 20vh;
   background-size: cover;
   &:hover {
-    filter: brightness(50%);
+    filter: brightness(70%);
   }
 `;
 
@@ -531,6 +534,16 @@ const SearchBtn = styled.button`
   }
   border: none;
   padding: 6%;
+`;
+
+const HostButton = styled.div`
+  border: 1px solid;
+  padding: 13px 23px;
+  width: 150px;
+  height: auto;
+  font-weight: 600;
+  border-radius: 8px;
+  text-align: center;
 `;
 
 export default Detail;

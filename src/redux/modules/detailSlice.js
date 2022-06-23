@@ -19,7 +19,7 @@ export const detailSlice = createSlice({
     list: [
       {
         id: 1,
-        address: "한국 강원도",
+        address: "서울특별시 강남구 테헤란로44길 8",
         houseName: "숙소저장해줘여",
         image:
           "https://a0.muscache.com/im/pictures/3639808c-8b04-4edf-b25a-c5e7e2adb254.jpg?im_w=1440",

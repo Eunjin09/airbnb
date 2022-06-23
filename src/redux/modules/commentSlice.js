@@ -24,7 +24,7 @@ export const addCommentDB = (comment, houseId) => {
 // 댓글 불러오기
 export const loadCommentDB = (houseId) => {
   return async function (dispatch) {
-    await instance.get(`/api/comment/${houseId}`).then((response) => {
+    await instance.get(`/api/allcomment/${houseId}`).then((response) => {
       console.log(response);
       dispatch(commentLoad(response.data));
     });
@@ -62,7 +62,7 @@ export const commentSlice = createSlice({
     },
     //댓글 불러오기
     commentLoad: (state, action) => {
-      state.list = action.payload;
+      state.list = action.payload.sort((a, b) => b.id - a.id);
       // console.log(state.list);
     },
     //댓글 삭제

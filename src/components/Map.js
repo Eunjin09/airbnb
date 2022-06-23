@@ -1,91 +1,66 @@
-// import React, { useEffect, useRef } from 'react';
-// import { useLocation } from 'react-router-dom';
-// import './Overlay.css';
+// 상세페이지 map
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import markerImage from "../image/marker.png";
 
-// const { kakao } = window;
+const Map = () => {
+  const { kakao } = window;
+  // 숙소 정보 가져오기
+  const housedraft = useSelector((state) => state.detail.list);
+  const house = housedraft[0];
 
-// const MapContainer = ({ productInfos }) => {
-//   const location = useLocation();
-//   // 지도 불러오기
-//   useEffect(() => {
-//     const container = document.getElementById('myMap');
-//     const options = {
-//       center: new kakao.maps.LatLng(33.450701, 126.570667),
-//       level: 10,
-//     };
+  useEffect(() => {
+    let container = document.getElementById("map");
+    let options = {
+      center: new window.kakao.maps.LatLng(37.5023088, 127.044437),
+      level: 6,
+    };
+    let map = new window.kakao.maps.Map(container, options);
 
-//     mapRef.current = new kakao.maps.Map(container, options);
-//   }, [location]);
+    var imageSrc = markerImage, // 마커이미지의 주소입니다
+      imageSize = new kakao.maps.Size(47, 49), // 마커이미지의 크기입니다
+      imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-//   const mapRef = useRef();
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(house.address, function (result, status) {
+      //  정상적으로 검색이 완료됐으면
+      if (status === kakao.maps.services.Status.OK) {
+        // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+        var markerImage = new kakao.maps.MarkerImage(
+            imageSrc,
+            imageSize,
+            imageOption
+          ),
+          markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+        // 결과값으로 받은 위치를 마커로 표시합니다
 
-//   // 마커 그리기
-//   // 백엔드로부터 받아온 데이터중에서 마커를 표시할 좌표와 커스텀 오버레이 작성을 위해 필요한 정보를 추출
-//   useEffect(() => {
-//     const overlayInfos = productInfos?.map(info => {
-//       return {
-//         title: info.name,
-//         lat: info.latitude,
-//         lng: info.longtitude,
-//         img: info.image_url[0],
-//         price: info.price,
-//         region: info.region,
-//         desc: info.description,
-//       };
-//     });
-//     // 추출한 정보를 forEach를 통해 반복문을 돌리며, new kakao.maps.Marker({마커가 표시될 지도, 마커가 표시될 좌표})를 통해 해당 좌표에 마커를 찍게 된다.
-//     overlayInfos.forEach(el => {
-//       let marker = new kakao.maps.Marker({
-//         map: mapRef.current,
-//         position: new kakao.maps.LatLng(el.lat, el.lng),
-//         title: el.title,
-//       });
+        var marker = new kakao.maps.Marker({
+          position: markerPosition,
+          image: markerImage, // 마커이미지 설정
+          map: map,
+        });
+      }
+      //   // 인포윈도우로 장소에 대한 설명을 표시합니다
+      //   var infowindow = new kakao.maps.InfoWindow({
+      //     content: `<div style="width:150px;text-align:center;padding:6px 0;">${house.houseName}</div>`,
+      //   });
+      //   infowindow.open(map, marker);
 
-//       // 3번부분
-//       let content =
-//         '<div class="overlayWrap">' +
-//         `    <img class="overlayImg" src=${el.img}/>` +
-//         '    <div class="accommInfoWrap">' +
-//         `        <h1 class="accommName">${el.title}</h1>` +
-//         `        <p class="accommRegion">${el.region}</p>` +
-//         `        <p class="accommDesc">${el.desc}</p>` +
-//         `        <p class="accommPrice">${Number(
-//           el.price
-//         ).toLocaleString()}</p>` +
-//         '    </div>' +
-//         '    <div class="overlayArrow">' +
-//         '</div>';
+      // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+      map.setCenter(markerPosition);
+    });
 
-//       let position = new kakao.maps.LatLng(el.lat, el.lng);
-//       // 커스텀 오버레이 ({오러베이 좌표, string타입으로 작성된 html})
-//       let customOverlay = new kakao.maps.CustomOverlay({
-//         position: position,
-//         content: content, //string타입만을 받기 때문에 컴포넌트가 들어갈 수 없다. 따라서 번거롭지만 위 3번과 같이 작성을 해야한다.
-//       });
-//       // 커스텀 오버레이를 생성한 이후, 마커에 mouseover이벤트가 일어날 경우에만 오버레이를 보여줄 것이기 때문에
-//       // 다음과 같이 customOverlay.setMap을 통해 이벤트가 발생할 때 오버레이가 나타나게끔 해주었고
-//       // mouseout 이벤트가 발생했을 때에는 아무것도 전달해주지 않으면 커스텀 오버레이가 그려지지 않습니다.
-//       kakao.maps.event.addListener(marker, 'mouseover', function () {
-//         customOverlay.setMap(mapRef.current);
-//       });
+    // 지도를 클릭한 위치에 표출할 마커입니다
+    var marker = new kakao.maps.Marker({
+      // 지도 중심좌표에 마커를 생성합니다
+      position: map.getCenter(),
+    });
+    // 지도에 마커를 표시합니다
+    marker.setMap(map);
+  }, [{ kakao }]);
 
-//       kakao.maps.event.addListener(marker, 'mouseout', function () {
-//         setTimeout(function () {
-//           customOverlay.setMap();
-//         });
-//       });
-//     });
-//   }, [productInfos]);
+  return <div id="map"></div>;
+};
 
-//   return (
-//     <div
-//       id="myMap"
-//       style={{
-//         width: '100%',
-//         height: '100%',
-//       }}
-//     />
-//   );
-// };
-
-// export default MapContainer;
+export default Map;

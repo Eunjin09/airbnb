@@ -51,14 +51,14 @@
 
 .InputComment {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1030px;
+  border: none;
+  border-bottom: 1px solid #000;
 }
 
 .CommentList {
   display: flex;
-  flex-direction: column-reverse;
-  white-space: nowrap;
-  overflow: auto;
+  flex-direction: column;
   height: auto;
 }
 
@@ -78,4 +78,9 @@
 
 .personCnt {
   display: flex;
+}
+
+.Calendar {
+  display: flex;
+  gap: 2%;
 }
