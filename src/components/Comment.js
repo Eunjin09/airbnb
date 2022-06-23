@@ -85,7 +85,6 @@ function Comment(props) {
                   <div
                     style={{
                       margin: "0.2%",
-                      // backgroundColor: "rgb(242 235 208)",
                     }}
                     key={index}
                   >
@@ -124,20 +123,23 @@ function Comment(props) {
                         margin: "1% 2%",
                         display: "flex",
                         justifyContent: "flex-end",
+                        gap: "1%",
                       }}
                     >
-                      {/* <button onClick={() => {}}>수정</button> */}
                       {user_name ? (
-                        <DetailButton
-                          onClick={() => {
-                            console.log("삭제버튼 클릭");
-                            dispatch(
-                              CommentActions.deleteCommentDB(commentvalue.id)
-                            );
-                          }}
-                        >
-                          삭제
-                        </DetailButton>
+                        <>
+                          <DetailButton onClick={() => {}}>수정</DetailButton>
+                          <DetailButton
+                            onClick={() => {
+                              console.log("삭제버튼 클릭");
+                              dispatch(
+                                CommentActions.deleteCommentDB(commentvalue.id)
+                              );
+                            }}
+                          >
+                            삭제
+                          </DetailButton>
+                        </>
                       ) : null}
                     </div>
                   </div>

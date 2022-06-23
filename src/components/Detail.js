@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import "./DetailStyle.css";
+import "./Calendar.css";
+import { Calendar, CalendarNext } from "./Calendar";
 import reviewimg from "../image/reviewrank.png";
+import safeimg from "../image/safeimg.svg";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as ListActions } from "../redux/modules/detailSlice";
-import Map from "./Map";
+import { deletePostDB } from "../redux/modules/listSlice";
 import { IsParking, IsWifi } from "./convienence";
 import Comment from "./Comment";
-import "./Calendar.css";
-import { Calendar, CalendarNext } from "./Calendar";
+import Map from "./Map";
 
 function Detail(props) {
   const params = useParams();
@@ -20,6 +22,8 @@ function Detail(props) {
   //댓글 불러오기 (commentCnt 필요해서)
   const commentsList = useSelector((state) => state.comment.list);
   const commentCnt = commentsList.length;
+
+  const user_name = localStorage.getItem("user_name"); //로그인 여부 확인
 
   // 숙소 정보 가져오기
   const housedraft = useSelector((state) => state.detail.list);
@@ -61,28 +65,66 @@ function Detail(props) {
                   {house.address}
                 </span>
               </span>
-              <div
-                style={{
-                  width: "100%",
-                  maxWidth: "150px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginRight: "1%",
-                }}
-              >
-                <button className="ButtonTransparent" onClick={() => {}}>
-                  삭제
-                </button>
-                <button
-                  className="ButtonTransparent"
-                  onClick={() => {
-                    navigate("/edit");
+
+              {user_name ? (
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "150px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginRight: "1%",
                   }}
                 >
-                  수정
-                </button>
-                <button className="ButtonTransparent">♡ 저장</button>
-              </div>
+                  <button
+                    className="ButtonTransparent"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      dispatch(deletePostDB(params.id));
+                    }}
+                  >
+                    삭제
+                  </button>
+                  <button
+                    className="ButtonTransparent"
+                    onClick={() => {
+                      navigate(`/edit/` + params.id);
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button className="ButtonTransparent">♡ 저장</button>
+                </div>
+              ) : (
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "150px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginRight: "1%",
+                  }}
+                >
+                  <button
+                    className="ButtonTransparent"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      alert("로그인이 필요합니다.");
+                    }}
+                  >
+                    삭제
+                  </button>
+                  <button
+                    className="ButtonTransparent"
+                    onClick={() => {
+                      alert("로그인이 필요합니다.");
+                    }}
+                  >
+                    수정
+                  </button>
+                  <button className="ButtonTransparent">♡ 저장</button>
+                </div>
+              )}
             </div>
           </section>
           <div className="ImageBox">
@@ -335,6 +377,26 @@ function Detail(props) {
                 <span>응답 시간: 1시간 이내</span>
                 <br />
                 <HostButton>호스트에게 연락하기</HostButton>
+
+                <div
+                  style={{
+                    width: "100%",
+                    maxWidth: "500px",
+                    display: "flex",
+                    gap: "2%",
+                    marginTop: "6%",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={{ width: "100%", maxWidth: "30px" }}>
+                    <img src={safeimg} alt="safeimg" />
+                  </div>
+
+                  <span style={{ fontSize: "13px" }}>
+                    안전한 결제를 위해 에어비앤비 웹사이트나 앱 외부에서
+                    송금하거나 대화를 나누지 마세요.
+                  </span>
+                </div>
               </div>
             </div>
           </div>
