@@ -111,7 +111,7 @@ function Main() {
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200"
+                src="https://a0.muscache.com/im/pictures/32e8b4a0-83ff-4dba-8253-5340d8d05215.jpg?im_w=1200"
                 alt=""
               />
             </div>
@@ -127,20 +127,19 @@ function Main() {
               </svg>
               4.73
             </span>
-            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
+            <h3>비치보이스, Boy21 (2인) 애월읍, 제주시, 제주도, 한국</h3>
             <p>
-              이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과
-              매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한
-              세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고
-              따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이
-              없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고,
-              통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
+              BeachBoys21
+              애월 곽지해수욕장을 끼고 있으며
+              1960~70년대의 빈티지 에어스트림을
+              건축적 소재로 이용해서 재해석한
+              레트로 감성캠핑 파티스테이션입니다.
             </p>
           </li>
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200"
+                src="https://a0.muscache.com/im/pictures/0029f6dc-5e55-492e-90c1-38100c006558.jpg?im_w=1200"
                 alt=""
               />
             </div>

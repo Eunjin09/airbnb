@@ -69,6 +69,8 @@ const LoginBody = styled.div`
   justify-content: center;
   display: flex;
   padding-top: 80px;
+  position: relative;
+  z-index: 999;
 `;
 
 const LoginBox = styled.div`

@@ -15,6 +15,7 @@ function Write() {
   const dispatch = useDispatch();
   // 주소 찾기 모달 상태(opend-> 불리언값으로 한번에 보이도록 하자)
   const [opened, setOpened] = useState();
+  const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   // 사진 업로드
   // const fileInput = useRef(null);
@@ -214,7 +215,7 @@ function Write() {
             <Inputarea name="houseName" value={houseName} onChange={onChange} />
           </InputBox>
           <InputBox>
-            <Textarea>5개의 사진을 올려주세요!</Textarea>
+            <Textarea>사진을 올려주세요!</Textarea>
             <label htmlFor="file" className="fileBox">
               사진 업로드하기
             </label>
@@ -245,13 +246,9 @@ function Write() {
           <InputBox>
             <Select name="personCnt" value={personCnt} onChange={onChange}>
               <option>인원수</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
+              {adultcount.map((v) => {
+                return <option value={v}>{v}</option>;
+              })}
             </Select>
             <Select name="wifi" value={wifi} onChange={onChange}>
               <option>와이파이</option>

@@ -28,7 +28,7 @@ export const addPostDB = (data) => {
       })
       .then((response) => {
         window.alert("등록 완료!");
-        window.location.replace("/");
+        window.location.replace("/search");
         dispatch(addPost(data));
       });
   };
