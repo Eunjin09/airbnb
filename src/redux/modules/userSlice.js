@@ -33,11 +33,22 @@ export const loginUserDB = (data) => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("user_name", response.data.nickName);
         localStorage.setItem("user_id", response.data.userId);
         console.log(response.data.accessToken);
         window.location.replace("/");
       });
+  };
+};
+
+export const logOutDB = (data) => {
+  console.log(data);
+  return async function (dispatch) {
+    await instance.post("/user/logout", data, {
+      "Content-Type": "application/json",
+      withCredentials: true,
+    });
   };
 };
 // 로그인정보받기

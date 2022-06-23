@@ -6,12 +6,21 @@ import { logo } from "../image/index";
 import Modal from "react-modal";
 import Signup from "./Signup";
 import Login from "./Login";
+import { useDispatch } from "react-redux";
+import { logOutDB } from "../redux/modules/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user_name = localStorage.getItem("user_name");
+  const refreshToken = localStorage.getItem("refreshToken");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [signupModalIsOpen, setSignupModalIsopen] = useState(false);
+  console.log(refreshToken);
+
+  const logOut = () => {
+    dispatch(logOutDB({ refreshToken: refreshToken }));
+  };
 
   return (
     <HeadDiv>
@@ -39,6 +48,7 @@ const Header = () => {
               </button>
               <button
                 onClick={() => {
+                  logOut();
                   localStorage.clear();
                   navigate("/");
                 }}
