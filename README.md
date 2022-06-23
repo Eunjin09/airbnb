@@ -5,7 +5,7 @@
 <i>Backend 깃헙 링크는 → https://github.com/AirBn-Clone-BE/AirBnB-Clone</i>
 <br/> <br/>
 
-<h1>📺 Airbnb</h1><br/>
+<h1>🛫 Airbnb</h1><br/>
 
 <h2>📆 프로젝트 기간 </h2>
 
@@ -14,8 +14,8 @@
 <h2>🤗 팀원 소개 </h2>
 
 <code>FrontEnd </code><br/>
-변희재 : 로그인, 회원가입, 헤더, 수정페이지, 게시글 삭제 기능 <br/>
-김은진 : 전체 숙소 목록 조회, 숙소 등록  <br/>
+변희재 : 로그인, 회원가입, 헤더, 수정페이지, 게시글 삭제 기능<br/>
+김은진 : 메인 페이지, 전체 숙소 목록 조회 페이지, 숙소 등록 페이지<br/>
 이영주 : 상세 페이지, 댓글 삭제, 등록 <br/><br/>
 
 <code>BackEnd</code><br/>
@@ -25,14 +25,14 @@
 
 
 <h2> 🎬 링크 & 시연 영상 </h2>
-<b> 시연 영상 </b> <br/>
+<b> 시연 영상 </b><br/>
+https://youtu.be/-UsameyX4Ls
 <br/>
 <br/>
-<b> 접속 링크 </b> <br/>
-
+<b> 접속 링크 </b><br/>
+http://code10.shop.s3-website.ap-northeast-2.amazonaws.com/
 <br/>
 <br/>
-
 
 # :computer: 기술 스택 
 #### Server 
