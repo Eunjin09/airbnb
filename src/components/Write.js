@@ -107,71 +107,15 @@ function Write() {
         break;
       }
       return true;
-      // if (array[i + 4]) {
-      //   if (array[4] === '인원수' || array[5] === '와이파이' || array[6] === '주차공간' || array[7] === '세탁시설') {
-      //     alert('카테고리를 입력해주세요!'); break;
-      //   }
-      // }
-      // if (array[array.length - 1]) {
-      //   if (array[array.length - 1] !== '') {
-      //     return true;
-      //   }
-      // }
     }
   };
 
-  // const { kakao } = window;
-
-  // // 주소-좌표 변환 객체를 생성합니다
-  // var geocoder = new kakao.maps.services.Geocoder();
-
-  // // 주소로 좌표를 검색합니다
-  // geocoder.addressSearch(address, function (result, status) {
-  //   console.log(result)
-
-  //   // 정상적으로 검색이 완료됐으면
-  //   if (status === kakao.maps.services.Status.OK) {
-
-  //     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-  //     console.log(coords)
-  // // 결과값으로 받은 위치를 마커로 표시합니다
-  // var marker = new kakao.maps.Marker({
-  //     map: map,
-  //     position: coords
-  // });
-
-  // // 인포윈도우로 장소에 대한 설명을 표시합니다
-  // var infowindow = new kakao.maps.InfoWindow({
-  //     content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-  // });
-  // infowindow.open(map, marker);
-
-  // // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-  // map.setCenter(coords);
-  // }
-  //   });
-
   // 작성하기 버튼 눌렀을때 :)
   const writeSubmit = () => {
-    // 작성하기 유효성 검사!
-    console.log(getInputs.wifi);
-    // if (getInputs.wifi === "와이파이 있음") {
-    //   setInputs(getInputs.wifi = true);
-    // }
-    // if (getInputs.wifi === "와이파이 없음") {
-    //   setInputs(getInputs.wifi = false);
-    // }
     const a = getInputs;
 
-    // if (a.wifi === 1) {
-    //   a.wifi = false;
-    // }
-    // console.log(wifi)
     const aa = Number(a.wifi);
     a.wifi = aa;
-    // a.parking = Boolean(a.wifi)
-    console.log(aa);
-    console.log(getInputs);
 
     if (a.wifi === 1) {
       a.wifi = true;
@@ -182,9 +126,6 @@ function Write() {
 
     const bb = Number(a.parking);
     a.parking = bb;
-    // a.parking = Boolean(a.wifi)
-    console.log(aa);
-    console.log(getInputs);
 
     if (a.parking === 1) {
       a.parking = true;
@@ -196,26 +137,8 @@ function Write() {
     getInputs.image = files;
 
     if (checked(getInputs) === true) {
-      console.log("w준비완료!");
       dispatch(addPostDB(getInputs));
     }
-    // if (title_ref.current.value.length > 0 && content_ref.current.value.length > 0 && imgUrl) {
-    //   const new_post = {
-    //     title: title_ref.current.value,
-    //     thumbnail_url: imgUrl,
-    //     onair_year: onair_year_ref.current.value,
-    //     content: content_ref.current.value,
-    //     ost_url: ost_url_ref.current.value,
-    //     user_id: user_info.user_id,
-    //   }
-    //   dispatch(create_post_AX(new_post))
-    //   navigate('/')
-    // } else {
-    //   const msg =
-    //     !title_ref.current.value.length > 0 ? '만화 제목을 등록해주세요' :
-    //       !content_ref.current.value.length > 0 ? '만화를 소개해주세요' : '이미지를 등록해주세요'
-    //   window.alert(msg)
-    // }
   };
 
   // 선택한 레이아웃
@@ -231,13 +154,6 @@ function Write() {
       [name]: value,
     });
   };
-
-  const [wifiv, setWifiv] = useState();
-
-  // const onCheck = (e) => {
-  //   console.log(e.target.value);
-
-  // }
 
   const is_checked = (e) => {
     const { name } = e.target;
