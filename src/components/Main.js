@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
+  const navigate = useNavigate();
+  const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
       <GlobalStyle />
@@ -37,9 +40,9 @@ function Main() {
                 <label>
                   <span>성인</span>
                   <select name="adult" id="">
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                    <option value="12">12</option>
+                    {adultcount.map((v) => {
+                      return <option value={v}>{v}</option>;
+                    })}
                   </select>
                 </label>
               </div>
@@ -54,7 +57,7 @@ function Main() {
                 </label>
               </div>
             </div>
-            <SearchBtn>
+            <SearchBtn onClick={() => navigate('/search')}>
               <svg
                 viewBox="0 0 16 16"
                 role="presentation"
@@ -330,6 +333,9 @@ const MainBox = styled.section`
   height: 478px;
   max-width: 1280px;
   margin: 0 auto 50px;
+  img {
+    width: 100%;
+  }
 `;
 
 const BackImg = styled.div`
@@ -340,6 +346,9 @@ const BackImg = styled.div`
   width: 960px;
   height: 478px;
   border-radius: 8px;
+  img {
+    width: 100%;
+  }
 `;
 
 const FormBox = styled.div`
@@ -353,6 +362,9 @@ const FormBox = styled.div`
   padding: 32px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
   border-radius: 12px;
+  img {
+    width: 100%;
+  }
 
   h1 {
     font-size: 34px;
@@ -434,6 +446,7 @@ const RankList = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 0 auto;
+  
   h2 {
     font-size: 26px;
     font-weight: 500;
@@ -454,6 +467,7 @@ const RankList = styled.section`
   }
   img {
     border-radius: 12px;
+    width: 100%;
   }
   ul {
     display: flex;
@@ -500,6 +514,9 @@ const OptionList = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 50px auto 0;
+  img {
+    width: 100%;
+  }
   h2 {
     font-size: 26px;
     font-weight: 500;
@@ -533,6 +550,9 @@ const List = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 80px auto 50px;
+  img {
+    width: 100%;
+  }
   h2 {
     font-size: 26px;
     font-weight: 500;

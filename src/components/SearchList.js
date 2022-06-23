@@ -2,14 +2,15 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 // import searchPlace from "./SearchPlace";
 import GlobalStyle from "./GlobalStyle";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { loadPostDB } from "../redux/modules/listSlice";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 
 const SearchList = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadPostDB());
@@ -109,7 +110,7 @@ const SearchList = () => {
             <ul>
               {post_list.map((post, idx) => {
                 return (
-                  <li key={idx}>
+                  <li key={idx} onClick={() => navigate('/detail/' + post.id)}>
                     <ImgBox><img src={post.image} alt="" /></ImgBox>
                     <h3>{post.houseName}</h3>
                     <span>4.73<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false"><path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z" ></path></svg></span>
@@ -191,6 +192,7 @@ const ListHeader = styled.div`
 const ImgBox = styled.div`
  width: 100%;
   height: 16vw;
+  margin-bottom: 10px;
 `
 // 검색 결과 리스트
 const ListBox = styled.div`
@@ -201,23 +203,33 @@ const ListBox = styled.div`
     flex-flow: row wrap;
      justify-content: space-between;
   width: 100%;
-	/* align-content: stretch; */
 }
 li {
   padding: 10px;
   width: 50%;
   flex-wrap: wrap;
-  /* flex: auto; */
-  /* display: grid;
-  grid-template-columns: 100%; */
-  /* margin: 10px; */
   border-radius: 12px;
+  h3 {
+    display : inline-block;
+    font-weight: 600;
+  }
   img {
     height: 100%;
     border-radius: 12px;
   }
   svg {
     width: 10px;height: 10px;
+  }
+  span {
+    display: block;
+    float : right;
+    font-weight : 300;
+    font-size: 14px;
+  }
+  div {
+    color:#ddd;
+    font-weight: 400;
+    margin: 5px 0;
   }
 }
 `

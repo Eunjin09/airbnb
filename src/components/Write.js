@@ -44,10 +44,8 @@ function Write() {
     );
 
     const file_url = await getDownloadURL(uploaded_file.ref);
-    console.log(file_url) //이미지 url
     file_link_ref.current = { url: file_url };
     setFiles(file_link_ref.current?.url);
-    console.log(files)
   }
 
 
@@ -142,7 +140,6 @@ function Write() {
 
   // input 작성시 변수에 담기
   const onChange = (e) => {
-    console.log(fileInput.current.value);
     const { name, value } = e.target;
 
     setInputs({
