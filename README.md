@@ -34,34 +34,22 @@
 <br/>
 
 
-<h2>💻 핵심기능 </h2>
-<li> <b> 로그인 / 회원가입 </b><br/>
-: JWT를 이용한 로그인과 회원가입<br/>
-
-<br/>
+<h2>💻 기술 스택 </h2>
+#### Server 
+  <img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=white">
   
-<li> <b> 헤더 </b><br/>
-: 유저의 로그인 여부 판단 후 헤더 변경<br/>
-
-<br/>
-
-<li> <b> 메인페이지 </b><br/>
-: 
+#### Framework
+  <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=white"> <img src="https://img.shields.io/badge/Springboot-6DB33F?style=for-the-badge&logo=Springboot&logoColor=white"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
   
-<br/>
-
-<li> <b> 글 작성 & 수정 </b><br/>
-: 업로드한 이미지를 미리보기 할 수 있습니다<br/>
-
-
-<br/>
+#### Language
+  <img src="https://img.shields.io/badge/JAVA-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
   
-<li> <b> 글 상세보기 & 댓글 & 좋아요 </b><br/>
-
- : 게시글에 좋아요를 누를 수 있습니다. <br/>
- : 게시글에 댓글을 달고 & 수정하고 & 삭제할 수 있습니다.
-<br/>
-<br/>
+#### Database
+  <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+  
+#### Tool
+  <img src="https://img.shields.io/badge/gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"> <img src="https://img.shields.io/badge/Git-00000?style=for-the-badge&logo=Git&logoColor=F05032]"/> <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white]"/>
+  
 <h2> 🛠️ 사용기술 </h2>
 
 <code>FrontEnd </code><br/>
@@ -77,7 +65,11 @@
 <br/>
   
 <code>BackEnd</code><br/>
-
+<li> Spring Boot
+<li> JPA
+<li> MySQL
+<li> AWS
+<li> JWt
   
 <br/>
   
