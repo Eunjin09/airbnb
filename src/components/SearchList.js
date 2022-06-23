@@ -138,6 +138,9 @@ const Wrap = styled.div`
   background: white;
   display: flex;
   float: left;
+  img {
+    width: 100%;
+  }
   .overlay {
     background: gold;
   }
