@@ -1,40 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
+import instance from "./instance";
 
 // 미들웨어
 // 게시글 전체 조회
 export const loadPostDB = (data) => {
   return async function (dispatch) {
-    await axios
-      .get("http://3.34.185.191/api/allhouse", data, {
+    await instance
+      .get("/api/allhouse", data, {
         "Content-Type": "application/json",
         withCredentials: true,
       })
       .then((response) => {
         console.log(response.data);
-        dispatch(loadPost(response.data))
+        dispatch(loadPost(response.data));
       });
   };
 };
 
-
 // 게시글 생성
 export const addPostDB = (data) => {
   return async function (dispatch) {
-    await axios
-      .post("http://3.34.185.191/api/house", data, {
+    await instance
+      .post("/api/house", data, {
         "Content-Type": "application/json",
         withCredentials: true,
       })
       .then((response) => {
         window.alert("등록 완료!");
-        window.location.replace('/')
-        dispatch(addPost(data))
+        window.location.replace("/");
+        dispatch(addPost(data));
       });
   };
 };
-
 
 // 리듀서
 const listSlice = createSlice({
@@ -50,14 +47,10 @@ const listSlice = createSlice({
     // 조회
     loadPost: (state, action) => {
       console.log(action.payload);
-      state.post_list = action.payload
-    }
+      state.post_list = action.payload;
+    },
   },
 });
 
-
-export const {
-  addPost,
-  loadPost
-} = listSlice.actions;
+export const { addPost, loadPost } = listSlice.actions;
 export default listSlice.reducer;

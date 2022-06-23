@@ -139,15 +139,18 @@ const HeadDiv = styled.div`
 `;
 
 const Btn = styled.div`
-  width: 15%;
+  width: 30%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  text-align: center;
   align-items: center;
   & > * {
     margin-right: 20px;
   }
   button {
+    display: flex;
+
     cursor: pointer;
     border: none;
     background-color: transparent;

@@ -5,7 +5,7 @@ import instance from "./instance";
 //작성한 숙소정보 가져오기
 export const loadDetailDB = (id) => {
   return async function (dispatch) {
-    await instance.get(`/detail/${id}`).then((response) => {
+    await instance.get(`/api/detail/${id}`).then((response) => {
       console.log(response);
       dispatch(houseLoad(response.data));
     });
@@ -34,7 +34,7 @@ export const detailSlice = createSlice({
   reducers: {
     //등록한 숙소 정보 불러오기
     houseLoad: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.list = action.payload;
     },
   },

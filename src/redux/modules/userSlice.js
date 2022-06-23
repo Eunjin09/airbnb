@@ -10,7 +10,14 @@ export const createUserDB = (data) => {
         withCredentials: true,
       })
       .then((response) => {
+        window.alert(response.data.message);
+        // window.alert(response.message);
         window.location.replace("/");
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          window.alert(error.response.data.message);
+        }
       });
   };
 };
