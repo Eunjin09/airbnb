@@ -78,7 +78,6 @@ const SearchList = () => {
       });
     }
   });
-
   return (
     <>
       <GlobalStyle />
