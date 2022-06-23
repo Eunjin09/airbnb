@@ -55,7 +55,6 @@ function Login() {
             </PasswordInput>
             <LoginBtnDiv>
               <LoginBtn onClick={login}>로그인</LoginBtn>
-              <LoginBtn>회원가입</LoginBtn>
             </LoginBtnDiv>
           </DownDiv>
         </LoginBox>
@@ -70,6 +69,8 @@ const LoginBody = styled.div`
   justify-content: center;
   display: flex;
   padding-top: 80px;
+  position: relative;
+  z-index: 999;
 `;
 
 const LoginBox = styled.div`

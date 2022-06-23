@@ -5,6 +5,7 @@ import GlobalStyle from "./GlobalStyle";
 
 function Main() {
   const navigate = useNavigate();
+  const adultcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   return (
     <>
       <GlobalStyle />
@@ -39,9 +40,9 @@ function Main() {
                 <label>
                   <span>성인</span>
                   <select name="adult" id="">
-                    <option value="4">4</option>
-                    <option value="8">8</option>
-                    <option value="12">12</option>
+                    {adultcount.map((v) => {
+                      return <option value={v}>{v}</option>;
+                    })}
                   </select>
                 </label>
               </div>
@@ -110,7 +111,7 @@ function Main() {
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200"
+                src="https://a0.muscache.com/im/pictures/a17609e2-d762-4365-a313-62e619e59872.jpg?im_w=720"
                 alt=""
               />
             </div>
@@ -124,22 +125,22 @@ function Main() {
               >
                 <path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z"></path>
               </svg>
-              4.73
+              4.79
             </span>
-            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
+            <h3>충주 수안보 벧아인펜션 독채</h3>
             <p>
-              이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과
-              매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한
-              세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고
-              따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이
-              없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고,
-              통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
+              충주에 위치한 벧아인펜션입니다. 아늑하고 따뜻한 방에서 여유로운
+              감성 힐링 휴가를 즐겨보세요. 높은 건물이 없는 마을의 3층 위치에서
+              탁 트인 자연 경관을 즐길 수도 있고, 통기타 집 앞에 위치한
+              잔디밭에서 피크닉을 즐길 수도 있습니다.인원이 적어 1층만 사용을
+              원하시면 호스트 프로필로 들어가셔서 1층만 상품으로 예약을
+              해주세요. 1층 35평 2층 30평 실외 300평
             </p>
           </li>
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/c2120b84-291d-4738-a911-97672d2ab3f2.jpg?im_w=1200"
+                src="https://a0.muscache.com/im/pictures/62d0e70e-7107-4d1b-beb5-21f0ad2bb811.jpg?im_w=720"
                 alt=""
               />
             </div>
@@ -153,16 +154,15 @@ function Main() {
               >
                 <path d="M15.094 1.579l-4.124 8.885-9.86 1.27a1 1 0 0 0-.542 1.736l7.293 6.565-1.965 9.852a1 1 0 0 0 1.483 1.061L16 25.951l8.625 4.997a1 1 0 0 0 1.482-1.06l-1.965-9.853 7.293-6.565a1 1 0 0 0-.541-1.735l-9.86-1.271-4.127-8.885a1 1 0 0 0-1.814 0z"></path>
               </svg>
-              4.73
+              4.88
             </span>
-            <h3>블랑드누아 (2인) blanc de noir 하귀애월해안도로</h3>
+            <h3>프라이빗하게 즐기는 빔 프로젝터 Lily Room</h3>
             <p>
-              이천 도자 예술촌에 위치한 통기타 모양의 전원 주택입니다. 자연과
-              매우 잘 어우러진 이천 도자 예술 마을에서 독특한 외관으로 유명한
-              세라 기타 문화관의 3층 테라스가 넓은 독채 집입니다. 아늑하고
-              따뜻한 방에서 여유로운 감성 힐링 휴가를 즐겨보세요. 높은 건물이
-              없는 마을의 3층 위치에서 탁 트인 자연 경관을 즐길 수도 있고,
-              통기타 집 앞에 위치한 잔디밭에서 피크닉을 즐길 수도 있습니다.
+              영월의 스테이하우스는 커플이 프라이빗하게 쉬기 좋은 객실입니다.
+              별도의 출입문 계단이 있는 2층 전체를 사용합니다. 창밖으로 보이는
+              주변 뷰와 예쁜 정원이 아름답고, 창밖으로 들리는 계곡물소리와
+              지저귀는 새소리 그리고 맑은 공기는 도시에서 지친 마음에 휴식을
+              주며, 매일 청결하게 관리하는 침구는 편안한 잠자리를 제공합니다.
             </p>
           </li>
         </ul>
@@ -251,7 +251,7 @@ function Main() {
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/b538f736-29b9-4626-8eea-81284704b403.jpg?im_w=720"
+                src="https://a0.muscache.com/im/pictures/32e8b4a0-83ff-4dba-8253-5340d8d05215.jpg?im_w=720"
                 alt=""
               />
             </div>
@@ -276,7 +276,7 @@ function Main() {
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/b538f736-29b9-4626-8eea-81284704b403.jpg?im_w=720"
+                src="https://a0.muscache.com/im/pictures/f20dbdb1-05b5-4f01-97ba-b113edc20795.jpg?im_w=720"
                 alt=""
               />
             </div>
@@ -301,7 +301,7 @@ function Main() {
           <li>
             <div>
               <img
-                src="https://a0.muscache.com/im/pictures/b538f736-29b9-4626-8eea-81284704b403.jpg?im_w=720"
+                src="https://a0.muscache.com/im/pictures/miso/Hosting-6188946/original/ee61e74f-deb0-4f41-b015-9c4781eed019.jpeg?im_w=720"
                 alt=""
               />
             </div>
@@ -336,6 +336,9 @@ const MainBox = styled.section`
   height: 478px;
   max-width: 1280px;
   margin: 0 auto 50px;
+  img {
+    width: 100%;
+  }
 `;
 
 const BackImg = styled.div`
@@ -346,6 +349,9 @@ const BackImg = styled.div`
   width: 960px;
   height: 478px;
   border-radius: 8px;
+  img {
+    width: 100%;
+  }
 `;
 
 const FormBox = styled.div`
@@ -359,6 +365,9 @@ const FormBox = styled.div`
   padding: 32px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px;
   border-radius: 12px;
+  img {
+    width: 100%;
+  }
 
   h1 {
     font-size: 34px;
@@ -440,6 +449,7 @@ const RankList = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 0 auto;
+
   h2 {
     font-size: 26px;
     font-weight: 500;
@@ -460,6 +470,7 @@ const RankList = styled.section`
   }
   img {
     border-radius: 12px;
+    width: 100%;
   }
   ul {
     display: flex;
@@ -506,6 +517,9 @@ const OptionList = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 50px auto 0;
+  img {
+    width: 100%;
+  }
   h2 {
     font-size: 26px;
     font-weight: 500;
@@ -539,6 +553,9 @@ const List = styled.section`
   width: 1280px;
   max-width: 1280px;
   margin: 80px auto 50px;
+  img {
+    width: 100%;
+  }
   h2 {
     font-size: 26px;
     font-weight: 500;

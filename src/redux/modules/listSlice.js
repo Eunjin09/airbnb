@@ -28,7 +28,7 @@ export const addPostDB = (data) => {
       })
       .then((response) => {
         window.alert("등록 완료!");
-        window.location.replace("/");
+        window.location.replace("/search");
         dispatch(addPost(data));
       });
   };
@@ -51,7 +51,7 @@ export const updatePostDB = (id, data) => {
     await instance.put(`/api/house/${id}`, data).then((response) => {
       console.log("수정 리스폰스");
       dispatch(updatePostDB(id));
-      window.location.replace("/");
+      window.location.replace("/edit/" + id);
     });
   };
 };

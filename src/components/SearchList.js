@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 // import searchPlace from "./SearchPlace";
 import GlobalStyle from "./GlobalStyle";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { loadPostDB } from "../redux/modules/listSlice";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const SearchList = () => {
@@ -195,6 +194,7 @@ const ListHeader = styled.div`
 const ImgBox = styled.div`
   width: 100%;
   height: 16vw;
+  margin-bottom: 10px;
 `;
 // 검색 결과 리스트
 const ListBox = styled.div`
@@ -205,24 +205,42 @@ const ListBox = styled.div`
     flex-flow: row wrap;
     justify-content: space-between;
     width: 100%;
-    /* align-content: stretch; */
   }
   li {
     padding: 10px;
     width: 50%;
     flex-wrap: wrap;
-    /* flex: auto; */
-    /* display: grid;
-  grid-template-columns: 100%; */
-    /* margin: 10px; */
     border-radius: 12px;
+    h3 {
+      display: inline-block;
+      font-weight: 600;
+    }
     img {
       height: 100%;
       border-radius: 12px;
+      img {
+        height: 100%;
+        border-radius: 12px;
+      }
+      svg {
+        width: 10px;
+        height: 10px;
+      }
     }
     svg {
       width: 10px;
       height: 10px;
+    }
+    span {
+      display: block;
+      float: right;
+      font-weight: 300;
+      font-size: 14px;
+    }
+    div {
+      color: #ddd;
+      font-weight: 400;
+      margin: 5px 0;
     }
   }
 `;
