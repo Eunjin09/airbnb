@@ -55,7 +55,6 @@ function Login() {
             </PasswordInput>
             <LoginBtnDiv>
               <LoginBtn onClick={login}>로그인</LoginBtn>
-              <LoginBtn>회원가입</LoginBtn>
             </LoginBtnDiv>
           </DownDiv>
         </LoginBox>
