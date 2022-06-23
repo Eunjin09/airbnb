@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "./GlobalStyle";
 
 function Main() {
+  const navigate = useNavigate();
   return (
     <>
       <GlobalStyle />
@@ -54,7 +56,11 @@ function Main() {
                 </label>
               </div>
             </div>
-            <SearchBtn>
+            <SearchBtn
+              onClick={() => {
+                navigate("/search");
+              }}
+            >
               <svg
                 viewBox="0 0 16 16"
                 role="presentation"
