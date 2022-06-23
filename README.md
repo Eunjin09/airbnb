@@ -1,38 +1,35 @@
 # Anime
-[항해99 7기 D반] 2조 미니 프로젝트 : 나의 추억의 만화 영화 <br/>
+[항해99 7기 D반] 4조 클론 코딩 프로젝트 : Airbnb <br/>
 <code>FrontEnd </code> 작업공간 입니다 :) <br/> <br/>
 
-<i>Backend 깃헙 링크는 → https://github.com/xoxokss/6Wmini</i>
+<i>Backend 깃헙 링크는 → https://github.com/AirBn-Clone-BE/AirBnB-Clone</i>
 <br/> <br/>
 
-<h1>📺 추억의 만화영화</h1><br/>
-
-어린 시절, 학교가 끝나면 TV 앞으로 달려가 챙겨보던 만화영화들을 기억하시나요?<br/>
-추억의 만화영화들을 공유하며 어린 시절 향수를 느껴보아요 :)<br/><br/>
+<h1>📺 Airbnb</h1><br/>
 
 <h2>📆 프로젝트 기간 </h2>
 
-2022년 6월 10일 ~ 6월 16일<br/><br/>
+2022년 6월 17일 ~ 6월 23일<br/><br/>
 
 <h2>🤗 팀원 소개 </h2>
 
 <code>FrontEnd </code><br/>
-강수현 : 글 작성 & 수정, 메인 리스트 디스플레이 <br/>
-김은진 : 로그인, 회원가입, 헤더 <br/>
-정예빈 : 글 상세보기, 삭제하기, 좋아요, 댓글 기능 <br/><br/>
+변희재 : 로그인, 회원가입, 헤더, 수정페이지, 게시글 삭제 기능 <br/>
+김은진 : 전체 숙소 목록 조회, 숙소 등록  <br/>
+이영주 : 상세 페이지, 댓글 삭제, 등록 <br/><br/>
 
 <code>BackEnd</code><br/>
-김상선: 댓글 작성 수정 삭제 관련 API <br/>
-진태인: 게시글 작성 조회 수정 삭제 좋아요 관련 API <br/>
-최봉규: 회원가입, 로그인 관련 API <br/><br/>
+진용희: 숙소 등록, 숙소 수정, 숙소 삭제, 숙소 전체 조회 관련 API<br/>
+박건영: 로그인, 회원가입 관련 API <br/>
+권도훈: 숙소 상세 조회, 댓글 등록, 삭제 관련 API <br/><br/>
 
 
 <h2> 🎬 링크 & 시연 영상 </h2>
 <b> 시연 영상 </b> <br/>
-https://www.youtube.com/watch?v=_U0lL7_E7qU&feature=youtu.be <br/>
+<br/>
 <br/>
 <b> 접속 링크 </b> <br/>
-http://suhyun.site.s3-website.ap-northeast-2.amazonaws.com/
+
 <br/>
 <br/>
 
@@ -44,14 +41,12 @@ http://suhyun.site.s3-website.ap-northeast-2.amazonaws.com/
 <br/>
   
 <li> <b> 헤더 </b><br/>
-: 유저의 로그인 여부 및 현재 보고있는 페이지를 판별하여 다른 정보를 보여줍니다. <br/>
+: 유저의 로그인 여부 판단 후 헤더 변경<br/>
 
 <br/>
 
 <li> <b> 메인페이지 </b><br/>
-: 추천순, 방영연도 순의 2가지 방식으로 리스트를 정렬해서 볼 수 있습니다. <br/>
-: 게시글의 추천 수가 썸네일과 함께 디스플레이 됩니다. <br/>
-: Windowing 기법을 이용한 가상화 목록 구현 <br/>
+: 
   
 <br/>
 
@@ -73,8 +68,8 @@ http://suhyun.site.s3-website.ap-northeast-2.amazonaws.com/
 <li> React
 <li> Redux
 <li> Axios
-<li> YouTube Data API v3
-<li> React-Player
+<li> kakao map API
+<li> react-daum-postcode
 <li> Firebase Storage
 <li> Styled-Components
 <li> Tool : Git, Notion, Figma
@@ -82,10 +77,7 @@ http://suhyun.site.s3-website.ap-northeast-2.amazonaws.com/
 <br/>
   
 <code>BackEnd</code><br/>
-<li> Server: AWS EC2 (Ubuntu 18.04 LTS)
-<li> Database: MongoDB
-<li> Runtime Flatform : Node.js
-<li> Tool : Git, Notion
+
   
 <br/>
   
