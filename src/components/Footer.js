@@ -32,7 +32,6 @@ const CopyRight = styled.div`
   font-size: 0.9rem;
   padding: 10px 20px;
   margin: 3vh;
-  color: #ccc;
 `;
 const YearDiv = styled.div`
   padding-top: 13px;
@@ -42,6 +41,13 @@ const CRli = styled.li`
   margin: 0px 20px;
   padding: 3px;
   font-size: 0.9rem;
+`;
+
+const Hr = styled.div`
+  margin: 5% 0;
+  border-top: 1px solid #9c9c9c;
+  border-bottom: 1px solid #f6f6f6;
+  border-color: #dddddd;
 `;
 
 const CopyRightul = styled.div``;
